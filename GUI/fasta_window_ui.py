@@ -37,7 +37,7 @@ class Ui_Dialog(object):
         self.fileUplBtn.setGeometry(QRect(340, 100, 113, 32))
         self.widget = QWidget(Dialog)
         self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(250, 140, 301, 411))
+        self.widget.setGeometry(QRect(250, 140, 301, 421))
         self.verticalLayout_3 = QVBoxLayout(self.widget)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -127,6 +127,14 @@ class Ui_Dialog(object):
 
         self.verticalLayout_3.addLayout(self.verticalLayout_2)
 
+        self.statusLabel = QLabel(self.widget)
+        self.statusLabel.setObjectName(u"statusLabel")
+        self.statusLabel.setFont(font2)
+        self.statusLabel.setStyleSheet(u"font: 15pt \".AppleSystemUIFont\";")
+        self.statusLabel.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_3.addWidget(self.statusLabel)
+
 
         self.retranslateUi(Dialog)
 
@@ -143,5 +151,6 @@ class Ui_Dialog(object):
         self.label_3.setText(QCoreApplication.translate("Dialog", u"Alignment Options:", None))
         self.mafftCheck.setText(QCoreApplication.translate("Dialog", u"mafft Alignment", None))
         self.clustalCheck.setText(QCoreApplication.translate("Dialog", u"Clustal Omega Alignment", None))
+        self.statusLabel.setText("")
     # retranslateUi
 

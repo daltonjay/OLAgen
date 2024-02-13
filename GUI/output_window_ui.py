@@ -31,8 +31,8 @@ class Ui_outputDialog(object):
         self.logoLabel.setPixmap(QPixmap(u"OLAgenLogo.png"))
         self.logoLabel.setScaledContents(True)
         self.probeTable = QTableWidget(outputDialog)
-        if (self.probeTable.columnCount() < 3):
-            self.probeTable.setColumnCount(3)
+        if (self.probeTable.columnCount() < 4):
+            self.probeTable.setColumnCount(4)
         font = QFont()
         font.setBold(True)
         __qtablewidgetitem = QTableWidgetItem()
@@ -44,11 +44,14 @@ class Ui_outputDialog(object):
         __qtablewidgetitem2 = QTableWidgetItem()
         __qtablewidgetitem2.setFont(font);
         self.probeTable.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        __qtablewidgetitem3.setFont(font);
+        self.probeTable.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         self.probeTable.setObjectName(u"probeTable")
-        self.probeTable.setGeometry(QRect(318, 140, 401, 261))
+        self.probeTable.setGeometry(QRect(70, 270, 661, 261))
         self.verticalLayoutWidget = QWidget(outputDialog)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QRect(78, 140, 211, 261))
+        self.verticalLayoutWidget.setGeometry(QRect(300, 110, 211, 151))
         self.verticalLayout_3 = QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -69,9 +72,16 @@ class Ui_outputDialog(object):
 
         self.csvExportBtn = QPushButton(outputDialog)
         self.csvExportBtn.setObjectName(u"csvExportBtn")
-        self.csvExportBtn.setGeometry(QRect(580, 410, 131, 32))
+        self.csvExportBtn.setGeometry(QRect(600, 550, 131, 32))
         self.csvExportBtn.setFont(font)
         self.csvExportBtn.setCursor(QCursor(Qt.PointingHandCursor))
+        self.homeButton = QPushButton(outputDialog)
+        self.homeButton.setObjectName(u"homeButton")
+        self.homeButton.setGeometry(QRect(60, 550, 113, 32))
+        self.plsUploadLbl = QLabel(outputDialog)
+        self.plsUploadLbl.setObjectName(u"plsUploadLbl")
+        self.plsUploadLbl.setGeometry(QRect(580, 580, 171, 20))
+        self.plsUploadLbl.setAlignment(Qt.AlignCenter)
 
         self.retranslateUi(outputDialog)
 
@@ -84,10 +94,14 @@ class Ui_outputDialog(object):
         ___qtablewidgetitem = self.probeTable.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("outputDialog", u"SNP", None));
         ___qtablewidgetitem1 = self.probeTable.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("outputDialog", u"Common Probe", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("outputDialog", u"Variable Probe (5' to 3')", None));
         ___qtablewidgetitem2 = self.probeTable.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("outputDialog", u"Variable Probe", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("outputDialog", u"Variable WT Probe (5' to 3')", None));
+        ___qtablewidgetitem3 = self.probeTable.horizontalHeaderItem(3)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("outputDialog", u"Common Probe (5' to 3')", None));
         self.label.setText(QCoreApplication.translate("outputDialog", u"Select Target of Interest", None))
         self.csvExportBtn.setText(QCoreApplication.translate("outputDialog", u"Export to .csv", None))
+        self.homeButton.setText(QCoreApplication.translate("outputDialog", u"Return Home", None))
+        self.plsUploadLbl.setText("")
     # retranslateUi
 

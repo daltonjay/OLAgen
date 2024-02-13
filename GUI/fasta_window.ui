@@ -56,7 +56,7 @@
      <x>250</x>
      <y>140</y>
      <width>301</width>
-     <height>411</height>
+     <height>421</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -198,6 +198,28 @@
        </widget>
       </item>
      </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="statusLabel">
+      <property name="font">
+       <font>
+        <family>.AppleSystemUIFont</family>
+        <pointsize>15</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 15pt &quot;.AppleSystemUIFont&quot;;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
