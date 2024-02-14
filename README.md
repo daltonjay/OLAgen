@@ -9,8 +9,6 @@ As of January 31, 2024, the necessary dependencies are as follows:
 
 - clustalo (Sequence alignment tool, command line-only) (http://www.clustal.org/omega/):
 
-- matplotlib (current form creates graphical representation of SNPs, may be removed).
-
 - PyQt5 (Python bindings for the Qt Cross platform application toolkit) (https://pypi.org/project/PyQt5/): pip install PyQt5
 
-
+- primer3-py (C-based Python tool for primer analysis and design): pip install primer3-py
