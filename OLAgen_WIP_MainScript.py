@@ -15,7 +15,6 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from Bio import SeqIO
 from PyQt5.QtWidgets import QWidget
-import matplotlib.pyplot as plt
 from olagenProcess import *
 
 global_muts = None
@@ -184,17 +183,48 @@ class outputWindow(QDialog):
     
     def __init__(self):
         super(outputWindow, self).__init__()
-        uic.loadUi('GUI/output_window.ui', self)
+        uic.loadUi('GUI/output_windowTAB.ui', self)
         
         self.csvExportBtn.clicked.connect(self.exportOutputToCSV)
         self.homeButton.clicked.connect(self.promptMainWindow)
         self.targetLst.addItems(target_names)
         self.targetLst.itemSelectionChanged.connect(self.update_table)
         
+        self.tabWidget.setCurrentIndex(0)
+        
+        # Ligation Probe Table Settings (Tab Index 0)
         self.probeTable.setColumnWidth(0, 61)  # Adjust the width as needed for the first column
         self.probeTable.setColumnWidth(1, 193)  # Adjust the width as needed for the second column
         self.probeTable.setColumnWidth(2, 193)  # Adjust the width as needed for the third column
         self.probeTable.setColumnWidth(3, 193)  # Adjust the width as needed for the fourth column
+        
+        # Set of Interest Table Settings
+        self.soiTable.setColumnWidth(0, 61)
+        self.soiTable.setColumnWidth(1, 193)
+        self.soiTable.setColumnWidth(2, 193)
+        self.soiTable.setColumnWidth(3, 193)
+        
+        # Primer Table Settings
+        self.primerTable.setColumnWidth(0, 61)
+        self.primerTable.setColumnWidth(1, 193)
+        self.primerTable.setColumnWidth(2, 193)
+        self.primerTable.setColumnWidth(3, 193)
+        self.primerTable.setColumnWidth(4, 100)
+        self.primerTable.setColumnWidth(5, 200)
+        
+        # All Reagent Table Settings
+        self.reagentTable.setColumnWidth(0, 60)
+        self.reagentTable.setColumnWidth(1, 100)
+        self.reagentTable.setColumnWidth(2, 60)
+        self.reagentTable.setColumnWidth(3, 200)
+        self.reagentTable.setColumnWidth(4, 200)
+        self.reagentTable.setColumnWidth(5, 200)
+        self.reagentTable.setColumnWidth(6, 200)
+        self.reagentTable.setColumnWidth(7, 200)
+        self.reagentTable.setColumnWidth(8, 200)
+        self.reagentTable.setColumnWidth(9, 100)
+        self.reagentTable.setColumnWidth(10, 200)
+        
     
     def update_table(self):
         selected_target = self.targetLst.selectedItems()
