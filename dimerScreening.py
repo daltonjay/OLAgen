@@ -4,13 +4,18 @@
 
 import primer3
 from Bio.Seq import Seq
+import pandas as pd # pip install pandas and pip install openpyxl
 
-# E484_cp = 'aaggttttaattgttactttccttta'
-# E484K_vp = 'ggtagcacaccttgtaatggtgtta'
+E484_cp = 'aaggttttaattgttactttccttta'
+E484K_vp = 'ggtagcacaccttgtaatggtgtta'
 # E484WT_vp = 'ggtagcacaccttgtaatggtgttg'
 # E484_VP_Primer_Region = 'GTTAAGGGAGTGAAGACGATCAGA' # Equal to the forward primer
 # E484_CP_Primer_Region = 'TTATGAGAAATCAAAGTCTTTGGGTT'
 # E484_Hydr_Region = 'AGTCATCTTTCGAGGTGACTTTTAGATTGCT'
+
+# Import primer_library 
+
+primer_df = pd.read_excel('primer_library.xlsx')
 
 def probe_spurious_ligation(variable_probe, common_probe):
     
@@ -71,3 +76,26 @@ def spurious_priming(vp_primer_region, hydr_probe_region, cp_primer_region, vari
     
 # val = spurious_priming(E484_VP_Primer_Region, E484_Hydr_Region, E484_CP_Primer_Region, E484K_vp, E484_cp)
 # print(val)
+
+def primer_library_test(primer_dataframe, variable_probe, common_probe):
+    success_idx = []
+    
+    for index, row in primer_dataframe.iterrows():
+        fwd_primer = row['Forward']
+        
+        rev_primer = row['Reverse']
+        rev_RC = str(Seq(row['Reverse']).reverse_complement())
+        
+        hydr_probe = row['Hydrolysis']
+        hydr_RC = str(Seq(row['Hydrolysis']).reverse_complement())
+        
+        lig_success = primer_spurious_ligation(fwd_primer, hydr_RC, rev_RC, variable_probe, common_probe)
+        pcr_success = spurious_priming(fwd_primer, hydr_RC, rev_RC, variable_probe, common_probe)
+        
+        if lig_success == 1 and pcr_success == 1:
+            success_idx.append(index)
+    
+    return primer_df.iloc[success_idx]
+    
+    
+primer_library_test(primer_df, E484K_vp, E484_cp)

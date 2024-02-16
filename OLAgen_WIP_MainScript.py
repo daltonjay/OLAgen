@@ -9,6 +9,7 @@ import sys
 import os
 import subprocess
 import csv
+import pandas as pd
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import (Qt, pyqtSignal, QStringListModel)
 from PyQt5.QtWidgets import *
@@ -16,11 +17,14 @@ from PyQt5 import uic
 from Bio import SeqIO
 from PyQt5.QtWidgets import QWidget
 from olagenProcess import *
+from dimerScreening import *
 
 global_muts = None
 target_names = None
 global_AA_seqs = None
 global_SeqIO_seqs = None
+global_storage_df = pd.DataFrame(columns = ['Target', 'SNP', 'VP_Probe', 'WT_Probe', 'CP_Probe'])
+primer_row_counter = -1
 
 class HelpWindow(QDialog):
     def __init__(self):
@@ -189,6 +193,8 @@ class outputWindow(QDialog):
         self.homeButton.clicked.connect(self.promptMainWindow)
         self.targetLst.addItems(target_names)
         self.targetLst.itemSelectionChanged.connect(self.update_table)
+        self.addSOIBtn.clicked.connect(self.addLigationSet)
+        self.genPrimerBtn.clicked.connect(self.generate_primers)
         
         self.tabWidget.setCurrentIndex(0)
         
@@ -199,7 +205,7 @@ class outputWindow(QDialog):
         self.probeTable.setColumnWidth(3, 193)  # Adjust the width as needed for the fourth column
         
         # Set of Interest Table Settings
-        self.soiTable.setColumnWidth(0, 61)
+        self.soiTable.setColumnWidth(0, 80)
         self.soiTable.setColumnWidth(1, 193)
         self.soiTable.setColumnWidth(2, 193)
         self.soiTable.setColumnWidth(3, 193)
@@ -229,6 +235,7 @@ class outputWindow(QDialog):
     def update_table(self):
         selected_target = self.targetLst.selectedItems()
         global target_specific_array
+        global global_storage_df
         
         if selected_target:
             selected_item = selected_target[0].text()
@@ -249,6 +256,7 @@ class outputWindow(QDialog):
             # Set the row count to the length of the list
             self.probeTable.setRowCount(len(values))
             
+            targetList = []
             snpList = []
             vpList = []
             wtList = []
@@ -263,13 +271,90 @@ class outputWindow(QDialog):
                 self.probeTable.setItem(i, 3, itemCP)
                 self.probeTable.setItem(i, 1, itemVP)
                 self.probeTable.setItem(i, 2, itemWT)
+                targetList.append(selected_item)
                 snpList.append(value)
-                vpList.append(VP_region[value])
-                cpList.append(CP_region[value])
-                wtList.append(WT_region[value])
+                vpList.append(str(VP_region[value]))
+                cpList.append(str(CP_region[value]))
+                wtList.append(str(WT_region[value]))
             
-            target_specific_array = [snpList, vpList, wtList, cpList] 
+            target_specific_array = [targetList, snpList, vpList, wtList, cpList] 
+            self.store_possibilities(target_specific_array)
+             
+    def store_possibilities(self, target_array):
+        global global_storage_df
+        
+        transposed_array = [[row[i] for row in target_array] for i in range(len(target_array[0]))]
+        new_data = pd.DataFrame(transposed_array, columns = ['Target', 'SNP', 'VP_Probe', 'WT_Probe', 'CP_Probe'])
+        
+        global_storage_df = pd.concat([global_storage_df, new_data])
             
+    def addLigationSet(self):
+        selectedSOI = self.probeTable.selectedItems()
+        if selectedSOI:
+            selected_row_data = [item.text() for item in selectedSOI]
+            self.add_row_to_SOI(selected_row_data)
+            
+    def add_row_to_SOI(self, row_data):
+        
+        selected_target = self.targetLst.selectedItems()
+        
+        current_row_count = self.soiTable.rowCount()
+        self.soiTable.setRowCount(current_row_count + 1)
+        
+        itemSNP = QTableWidgetItem(str(row_data[0]))
+        itemID = QTableWidgetItem('OLAset_' + str(current_row_count + 1))
+        itemTarget = QTableWidgetItem(selected_target[0].text())
+        itemGen = QTableWidgetItem('No')
+        
+        self.soiTable.setItem(current_row_count, 0, itemID)
+        self.soiTable.setItem(current_row_count, 1, itemTarget)
+        self.soiTable.setItem(current_row_count, 2, itemSNP)
+        self.soiTable.setItem(current_row_count, 3, itemGen)
+        
+    def generate_primers(self):
+        global primer_row_counter
+        global global_storage_df
+        
+        soi_for_primers = self.soiTable.selectedItems()
+        
+        if soi_for_primers:
+            
+            selected_row_data = [item.text() for item in soi_for_primers]
+            
+            selected_row = soi_for_primers[0].row()
+            itemGen = QTableWidgetItem('Yes')
+            
+            self.soiTable.setItem(selected_row, 3, itemGen) 
+        
+        choice_target = str(selected_row_data[1])
+        choice_snp = str(selected_row_data[2])
+        
+        desired_row = global_storage_df[(global_storage_df['Target'] == choice_target) & (global_storage_df['SNP'] == choice_snp)]
+        
+        success_primers_df = primer_library_test(primer_df, str(desired_row['VP_Probe']), str(desired_row['CP_Probe']))
+        print(success_primers_df)
+        
+        
+        for row_indx, row in success_primers_df.iterrows():
+            
+            current_row_count = self.primerTable.rowCount()
+            self.primerTable.setRowCount(current_row_count + 1)
+            primer_row_counter += 1
+            
+            itemID = QTableWidgetItem(str(selected_row_data[0]))
+            fwdItem = QTableWidgetItem(str(row.iloc[0]))
+            revItem = QTableWidgetItem(str(row.iloc[1]))
+            hydrItem = QTableWidgetItem(str(row.iloc[2]))
+            typeItem = QTableWidgetItem(str(row.iloc[3]))
+            citationItem = QTableWidgetItem(str(row.iloc[4]))
+            
+            self.primerTable.setItem(primer_row_counter, 0, itemID)
+            self.primerTable.setItem(primer_row_counter, 1, fwdItem)
+            self.primerTable.setItem(primer_row_counter, 2, revItem)
+            self.primerTable.setItem(primer_row_counter, 3, hydrItem)
+            self.primerTable.setItem(primer_row_counter, 4, typeItem)
+            self.primerTable.setItem(primer_row_counter, 5, citationItem)
+        
     
     def exportOutputToCSV(self):
         selected_target = self.targetLst.selectedItems()
