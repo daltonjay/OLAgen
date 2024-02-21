@@ -76,9 +76,9 @@
   <widget class="QPushButton" name="csvExportBtn">
    <property name="geometry">
     <rect>
-     <x>600</x>
+     <x>530</x>
      <y>550</y>
-     <width>131</width>
+     <width>201</width>
      <height>32</height>
     </rect>
    </property>
@@ -92,7 +92,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>Export to .csv</string>
+    <string>Export current tab to .csv</string>
    </property>
   </widget>
   <widget class="QPushButton" name="homeButton">
@@ -134,7 +134,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="ligTab">
     <attribute name="title">
@@ -205,6 +205,19 @@
      </property>
      <property name="text">
       <string>Add Set of Interest</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="genAltOrient">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>240</y>
+       <width>221</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Generate Alternative Orientation</string>
      </property>
     </widget>
    </widget>
@@ -309,6 +322,28 @@
      <column>
       <property name="text">
        <string>Set ID</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Target</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>SNP</string>
       </property>
       <property name="font">
        <font>
@@ -525,7 +560,7 @@
      </column>
      <column>
       <property name="text">
-       <string>Citation</string>
+       <string>Primer Citation</string>
       </property>
       <property name="font">
        <font>

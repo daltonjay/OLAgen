@@ -55,7 +55,7 @@ class Ui_outputDialog(object):
 
         self.csvExportBtn = QPushButton(outputDialog)
         self.csvExportBtn.setObjectName(u"csvExportBtn")
-        self.csvExportBtn.setGeometry(QRect(600, 550, 131, 32))
+        self.csvExportBtn.setGeometry(QRect(530, 550, 201, 32))
         self.csvExportBtn.setFont(font)
         self.csvExportBtn.setCursor(QCursor(Qt.PointingHandCursor))
         self.homeButton = QPushButton(outputDialog)
@@ -90,6 +90,9 @@ class Ui_outputDialog(object):
         self.addSOIBtn = QPushButton(self.ligTab)
         self.addSOIBtn.setObjectName(u"addSOIBtn")
         self.addSOIBtn.setGeometry(QRect(502, 240, 151, 32))
+        self.genAltOrient = QPushButton(self.ligTab)
+        self.genAltOrient.setObjectName(u"genAltOrient")
+        self.genAltOrient.setGeometry(QRect(60, 240, 221, 32))
         self.tabWidget.addTab(self.ligTab, "")
         self.soiTab = QWidget()
         self.soiTab.setObjectName(u"soiTab")
@@ -120,8 +123,8 @@ class Ui_outputDialog(object):
         self.primerTab = QWidget()
         self.primerTab.setObjectName(u"primerTab")
         self.primerTable = QTableWidget(self.primerTab)
-        if (self.primerTable.columnCount() < 6):
-            self.primerTable.setColumnCount(6)
+        if (self.primerTable.columnCount() < 8):
+            self.primerTable.setColumnCount(8)
         __qtablewidgetitem8 = QTableWidgetItem()
         __qtablewidgetitem8.setFont(font);
         self.primerTable.setHorizontalHeaderItem(0, __qtablewidgetitem8)
@@ -140,6 +143,12 @@ class Ui_outputDialog(object):
         __qtablewidgetitem13 = QTableWidgetItem()
         __qtablewidgetitem13.setFont(font);
         self.primerTable.setHorizontalHeaderItem(5, __qtablewidgetitem13)
+        __qtablewidgetitem14 = QTableWidgetItem()
+        __qtablewidgetitem14.setFont(font);
+        self.primerTable.setHorizontalHeaderItem(6, __qtablewidgetitem14)
+        __qtablewidgetitem15 = QTableWidgetItem()
+        __qtablewidgetitem15.setFont(font);
+        self.primerTable.setHorizontalHeaderItem(7, __qtablewidgetitem15)
         self.primerTable.setObjectName(u"primerTable")
         self.primerTable.setGeometry(QRect(20, 0, 671, 231))
         self.removePrimerBtn = QPushButton(self.primerTab)
@@ -154,46 +163,46 @@ class Ui_outputDialog(object):
         self.reagentTable = QTableWidget(self.allTab)
         if (self.reagentTable.columnCount() < 11):
             self.reagentTable.setColumnCount(11)
-        __qtablewidgetitem14 = QTableWidgetItem()
-        __qtablewidgetitem14.setFont(font);
-        self.reagentTable.setHorizontalHeaderItem(0, __qtablewidgetitem14)
-        __qtablewidgetitem15 = QTableWidgetItem()
-        __qtablewidgetitem15.setFont(font);
-        self.reagentTable.setHorizontalHeaderItem(1, __qtablewidgetitem15)
         __qtablewidgetitem16 = QTableWidgetItem()
         __qtablewidgetitem16.setFont(font);
-        self.reagentTable.setHorizontalHeaderItem(2, __qtablewidgetitem16)
+        self.reagentTable.setHorizontalHeaderItem(0, __qtablewidgetitem16)
         __qtablewidgetitem17 = QTableWidgetItem()
         __qtablewidgetitem17.setFont(font);
-        self.reagentTable.setHorizontalHeaderItem(3, __qtablewidgetitem17)
+        self.reagentTable.setHorizontalHeaderItem(1, __qtablewidgetitem17)
         __qtablewidgetitem18 = QTableWidgetItem()
         __qtablewidgetitem18.setFont(font);
-        self.reagentTable.setHorizontalHeaderItem(4, __qtablewidgetitem18)
+        self.reagentTable.setHorizontalHeaderItem(2, __qtablewidgetitem18)
         __qtablewidgetitem19 = QTableWidgetItem()
         __qtablewidgetitem19.setFont(font);
-        self.reagentTable.setHorizontalHeaderItem(5, __qtablewidgetitem19)
+        self.reagentTable.setHorizontalHeaderItem(3, __qtablewidgetitem19)
         __qtablewidgetitem20 = QTableWidgetItem()
         __qtablewidgetitem20.setFont(font);
-        self.reagentTable.setHorizontalHeaderItem(6, __qtablewidgetitem20)
+        self.reagentTable.setHorizontalHeaderItem(4, __qtablewidgetitem20)
         __qtablewidgetitem21 = QTableWidgetItem()
         __qtablewidgetitem21.setFont(font);
-        self.reagentTable.setHorizontalHeaderItem(7, __qtablewidgetitem21)
+        self.reagentTable.setHorizontalHeaderItem(5, __qtablewidgetitem21)
         __qtablewidgetitem22 = QTableWidgetItem()
         __qtablewidgetitem22.setFont(font);
-        self.reagentTable.setHorizontalHeaderItem(8, __qtablewidgetitem22)
+        self.reagentTable.setHorizontalHeaderItem(6, __qtablewidgetitem22)
         __qtablewidgetitem23 = QTableWidgetItem()
         __qtablewidgetitem23.setFont(font);
-        self.reagentTable.setHorizontalHeaderItem(9, __qtablewidgetitem23)
+        self.reagentTable.setHorizontalHeaderItem(7, __qtablewidgetitem23)
         __qtablewidgetitem24 = QTableWidgetItem()
         __qtablewidgetitem24.setFont(font);
-        self.reagentTable.setHorizontalHeaderItem(10, __qtablewidgetitem24)
+        self.reagentTable.setHorizontalHeaderItem(8, __qtablewidgetitem24)
+        __qtablewidgetitem25 = QTableWidgetItem()
+        __qtablewidgetitem25.setFont(font);
+        self.reagentTable.setHorizontalHeaderItem(9, __qtablewidgetitem25)
+        __qtablewidgetitem26 = QTableWidgetItem()
+        __qtablewidgetitem26.setFont(font);
+        self.reagentTable.setHorizontalHeaderItem(10, __qtablewidgetitem26)
         self.reagentTable.setObjectName(u"reagentTable")
         self.reagentTable.setGeometry(QRect(20, 10, 671, 231))
         self.tabWidget.addTab(self.allTab, "")
 
         self.retranslateUi(outputDialog)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(outputDialog)
@@ -203,7 +212,7 @@ class Ui_outputDialog(object):
         outputDialog.setWindowTitle(QCoreApplication.translate("outputDialog", u"Dialog", None))
         self.logoLabel.setText("")
         self.label.setText(QCoreApplication.translate("outputDialog", u"Select Target of Interest", None))
-        self.csvExportBtn.setText(QCoreApplication.translate("outputDialog", u"Export to .csv", None))
+        self.csvExportBtn.setText(QCoreApplication.translate("outputDialog", u"Export current tab to .csv", None))
         self.homeButton.setText(QCoreApplication.translate("outputDialog", u"Return Home", None))
         self.plsUploadLbl.setText("")
         ___qtablewidgetitem = self.probeTable.horizontalHeaderItem(0)
@@ -215,6 +224,7 @@ class Ui_outputDialog(object):
         ___qtablewidgetitem3 = self.probeTable.horizontalHeaderItem(3)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("outputDialog", u"Common Probe (5' to 3')", None));
         self.addSOIBtn.setText(QCoreApplication.translate("outputDialog", u"Add Set of Interest", None))
+        self.genAltOrient.setText(QCoreApplication.translate("outputDialog", u"Generate Alternative Orientation", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.ligTab), QCoreApplication.translate("outputDialog", u"Ligation Probes", None))
         ___qtablewidgetitem4 = self.soiTable.horizontalHeaderItem(0)
         ___qtablewidgetitem4.setText(QCoreApplication.translate("outputDialog", u"Set ID", None));
@@ -230,40 +240,44 @@ class Ui_outputDialog(object):
         ___qtablewidgetitem8 = self.primerTable.horizontalHeaderItem(0)
         ___qtablewidgetitem8.setText(QCoreApplication.translate("outputDialog", u"Set ID", None));
         ___qtablewidgetitem9 = self.primerTable.horizontalHeaderItem(1)
-        ___qtablewidgetitem9.setText(QCoreApplication.translate("outputDialog", u"Forward Primer", None));
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("outputDialog", u"Target", None));
         ___qtablewidgetitem10 = self.primerTable.horizontalHeaderItem(2)
-        ___qtablewidgetitem10.setText(QCoreApplication.translate("outputDialog", u"Reverse Primer", None));
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("outputDialog", u"SNP", None));
         ___qtablewidgetitem11 = self.primerTable.horizontalHeaderItem(3)
-        ___qtablewidgetitem11.setText(QCoreApplication.translate("outputDialog", u"Hydrolysis Probe", None));
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("outputDialog", u"Forward Primer", None));
         ___qtablewidgetitem12 = self.primerTable.horizontalHeaderItem(4)
-        ___qtablewidgetitem12.setText(QCoreApplication.translate("outputDialog", u"Primer Type", None));
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("outputDialog", u"Reverse Primer", None));
         ___qtablewidgetitem13 = self.primerTable.horizontalHeaderItem(5)
-        ___qtablewidgetitem13.setText(QCoreApplication.translate("outputDialog", u"Citation", None));
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("outputDialog", u"Hydrolysis Probe", None));
+        ___qtablewidgetitem14 = self.primerTable.horizontalHeaderItem(6)
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("outputDialog", u"Primer Type", None));
+        ___qtablewidgetitem15 = self.primerTable.horizontalHeaderItem(7)
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("outputDialog", u"Citation", None));
         self.removePrimerBtn.setText(QCoreApplication.translate("outputDialog", u"Remove Candidate", None))
         self.genFullReagent.setText(QCoreApplication.translate("outputDialog", u"Generate Full Reagents", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.primerTab), QCoreApplication.translate("outputDialog", u"Primer Candidates", None))
-        ___qtablewidgetitem14 = self.reagentTable.horizontalHeaderItem(0)
-        ___qtablewidgetitem14.setText(QCoreApplication.translate("outputDialog", u"Set ID", None));
-        ___qtablewidgetitem15 = self.reagentTable.horizontalHeaderItem(1)
-        ___qtablewidgetitem15.setText(QCoreApplication.translate("outputDialog", u"Target", None));
-        ___qtablewidgetitem16 = self.reagentTable.horizontalHeaderItem(2)
-        ___qtablewidgetitem16.setText(QCoreApplication.translate("outputDialog", u"SNP", None));
-        ___qtablewidgetitem17 = self.reagentTable.horizontalHeaderItem(3)
-        ___qtablewidgetitem17.setText(QCoreApplication.translate("outputDialog", u"VP+Fwd+Hydr", None));
-        ___qtablewidgetitem18 = self.reagentTable.horizontalHeaderItem(4)
-        ___qtablewidgetitem18.setText(QCoreApplication.translate("outputDialog", u"VP WT+Fwd", None));
-        ___qtablewidgetitem19 = self.reagentTable.horizontalHeaderItem(5)
-        ___qtablewidgetitem19.setText(QCoreApplication.translate("outputDialog", u"CP+Rev", None));
-        ___qtablewidgetitem20 = self.reagentTable.horizontalHeaderItem(6)
-        ___qtablewidgetitem20.setText(QCoreApplication.translate("outputDialog", u"Forward Primer", None));
-        ___qtablewidgetitem21 = self.reagentTable.horizontalHeaderItem(7)
-        ___qtablewidgetitem21.setText(QCoreApplication.translate("outputDialog", u"Reverse Primer", None));
-        ___qtablewidgetitem22 = self.reagentTable.horizontalHeaderItem(8)
-        ___qtablewidgetitem22.setText(QCoreApplication.translate("outputDialog", u"Hydrolysis Probe", None));
-        ___qtablewidgetitem23 = self.reagentTable.horizontalHeaderItem(9)
-        ___qtablewidgetitem23.setText(QCoreApplication.translate("outputDialog", u"Primer Type", None));
-        ___qtablewidgetitem24 = self.reagentTable.horizontalHeaderItem(10)
-        ___qtablewidgetitem24.setText(QCoreApplication.translate("outputDialog", u"Citation", None));
+        ___qtablewidgetitem16 = self.reagentTable.horizontalHeaderItem(0)
+        ___qtablewidgetitem16.setText(QCoreApplication.translate("outputDialog", u"Set ID", None));
+        ___qtablewidgetitem17 = self.reagentTable.horizontalHeaderItem(1)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("outputDialog", u"Target", None));
+        ___qtablewidgetitem18 = self.reagentTable.horizontalHeaderItem(2)
+        ___qtablewidgetitem18.setText(QCoreApplication.translate("outputDialog", u"SNP", None));
+        ___qtablewidgetitem19 = self.reagentTable.horizontalHeaderItem(3)
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("outputDialog", u"VP+Fwd+Hydr", None));
+        ___qtablewidgetitem20 = self.reagentTable.horizontalHeaderItem(4)
+        ___qtablewidgetitem20.setText(QCoreApplication.translate("outputDialog", u"VP WT+Fwd", None));
+        ___qtablewidgetitem21 = self.reagentTable.horizontalHeaderItem(5)
+        ___qtablewidgetitem21.setText(QCoreApplication.translate("outputDialog", u"CP+Rev", None));
+        ___qtablewidgetitem22 = self.reagentTable.horizontalHeaderItem(6)
+        ___qtablewidgetitem22.setText(QCoreApplication.translate("outputDialog", u"Forward Primer", None));
+        ___qtablewidgetitem23 = self.reagentTable.horizontalHeaderItem(7)
+        ___qtablewidgetitem23.setText(QCoreApplication.translate("outputDialog", u"Reverse Primer", None));
+        ___qtablewidgetitem24 = self.reagentTable.horizontalHeaderItem(8)
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("outputDialog", u"Hydrolysis Probe", None));
+        ___qtablewidgetitem25 = self.reagentTable.horizontalHeaderItem(9)
+        ___qtablewidgetitem25.setText(QCoreApplication.translate("outputDialog", u"Primer Type", None));
+        ___qtablewidgetitem26 = self.reagentTable.horizontalHeaderItem(10)
+        ___qtablewidgetitem26.setText(QCoreApplication.translate("outputDialog", u"Primer Citation", None));
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.allTab), QCoreApplication.translate("outputDialog", u"All Reagents", None))
     # retranslateUi
 

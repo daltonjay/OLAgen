@@ -35,15 +35,15 @@ class Ui_Dialog(object):
         self.fileUplBtn = QPushButton(Dialog)
         self.fileUplBtn.setObjectName(u"fileUplBtn")
         self.fileUplBtn.setGeometry(QRect(340, 100, 113, 32))
-        self.widget = QWidget(Dialog)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(250, 140, 301, 421))
-        self.verticalLayout_3 = QVBoxLayout(self.widget)
+        self.layoutWidget = QWidget(Dialog)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(250, 140, 301, 421))
+        self.verticalLayout_3 = QVBoxLayout(self.layoutWidget)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.label = QLabel(self.widget)
+        self.label = QLabel(self.layoutWidget)
         self.label.setObjectName(u"label")
         font1 = QFont()
         font1.setPointSize(18)
@@ -54,7 +54,7 @@ class Ui_Dialog(object):
 
         self.verticalLayout.addWidget(self.label)
 
-        self.userFileLabel = QLabel(self.widget)
+        self.userFileLabel = QLabel(self.layoutWidget)
         self.userFileLabel.setObjectName(u"userFileLabel")
         font2 = QFont()
         font2.setFamilies([u".AppleSystemUIFont"])
@@ -70,7 +70,7 @@ class Ui_Dialog(object):
 
         self.verticalLayout_3.addLayout(self.verticalLayout)
 
-        self.label_2 = QLabel(self.widget)
+        self.label_2 = QLabel(self.layoutWidget)
         self.label_2.setObjectName(u"label_2")
         font3 = QFont()
         font3.setPointSize(16)
@@ -81,7 +81,13 @@ class Ui_Dialog(object):
 
         self.verticalLayout_3.addWidget(self.label_2)
 
-        self.entryIDList = QListView(self.widget)
+        self.label_4 = QLabel(self.layoutWidget)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_3.addWidget(self.label_4)
+
+        self.entryIDList = QListView(self.layoutWidget)
         self.entryIDList.setObjectName(u"entryIDList")
         font4 = QFont()
         font4.setPointSize(14)
@@ -92,14 +98,14 @@ class Ui_Dialog(object):
 
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.label_3 = QLabel(self.widget)
+        self.label_3 = QLabel(self.layoutWidget)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setFont(font1)
         self.label_3.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_2.addWidget(self.label_3)
 
-        self.mafftCheck = QCheckBox(self.widget)
+        self.mafftCheck = QCheckBox(self.layoutWidget)
         self.mafftCheck.setObjectName(u"mafftCheck")
         font5 = QFont()
         font5.setPointSize(15)
@@ -110,14 +116,14 @@ class Ui_Dialog(object):
 
         self.verticalLayout_2.addWidget(self.mafftCheck, 0, Qt.AlignHCenter)
 
-        self.clustalCheck = QCheckBox(self.widget)
+        self.clustalCheck = QCheckBox(self.layoutWidget)
         self.clustalCheck.setObjectName(u"clustalCheck")
         self.clustalCheck.setFont(font5)
         self.clustalCheck.setTristate(False)
 
         self.verticalLayout_2.addWidget(self.clustalCheck, 0, Qt.AlignHCenter)
 
-        self.alignBtnBox = QDialogButtonBox(self.widget)
+        self.alignBtnBox = QDialogButtonBox(self.layoutWidget)
         self.alignBtnBox.setObjectName(u"alignBtnBox")
         self.alignBtnBox.setOrientation(Qt.Vertical)
         self.alignBtnBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
@@ -127,7 +133,7 @@ class Ui_Dialog(object):
 
         self.verticalLayout_3.addLayout(self.verticalLayout_2)
 
-        self.statusLabel = QLabel(self.widget)
+        self.statusLabel = QLabel(self.layoutWidget)
         self.statusLabel.setObjectName(u"statusLabel")
         self.statusLabel.setFont(font2)
         self.statusLabel.setStyleSheet(u"font: 15pt \".AppleSystemUIFont\";")
@@ -148,6 +154,7 @@ class Ui_Dialog(object):
         self.label.setText(QCoreApplication.translate("Dialog", u".fasta file:", None))
         self.userFileLabel.setText(QCoreApplication.translate("Dialog", u"...", None))
         self.label_2.setText(QCoreApplication.translate("Dialog", u"User Input Entry IDs", None))
+        self.label_4.setText(QCoreApplication.translate("Dialog", u"Please Select the Reference Sequence", None))
         self.label_3.setText(QCoreApplication.translate("Dialog", u"Alignment Options:", None))
         self.mafftCheck.setText(QCoreApplication.translate("Dialog", u"mafft Alignment", None))
         self.clustalCheck.setText(QCoreApplication.translate("Dialog", u"Clustal Omega Alignment", None))
