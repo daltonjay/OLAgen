@@ -306,7 +306,7 @@ class outputWindow(QDialog):
                 self.probeTable.setRowCount(current_row_count + 1)
                 full_region , VP_region, CP_region, WT_region = viableSNP_sequences(global_SeqIO_seqs, selected_item, snp_value, 'reorient')
                 print(VP_region, CP_region, WT_region)
-                itemSNP = QTableWidgetItem(snp_value[0])
+                itemSNP = QTableWidgetItem(snp_value[0]+'(-)')
                 itemVP = QTableWidgetItem(str(VP_region[snp_value[0]]))
                 itemCP = QTableWidgetItem(str(CP_region[snp_value[0]]))
                 itemWT = QTableWidgetItem(str(WT_region[snp_value[0]]))
@@ -314,6 +314,15 @@ class outputWindow(QDialog):
                 self.probeTable.setItem(current_row_count, 3, itemCP)
                 self.probeTable.setItem(current_row_count, 1, itemVP)
                 self.probeTable.setItem(current_row_count, 2, itemWT)
+                
+                targetList = [selected_item]
+                snpList = [snp_value[0]+'(-)']
+                vpList = [str(VP_region[snp_value[0]])]
+                wtList = [str(WT_region[snp_value[0]])]
+                cpList = [str(CP_region[snp_value[0]])]
+                
+                target_specific_array = [targetList, snpList, vpList, wtList, cpList]
+                self.store_possibilities(target_specific_array)
     
     def store_possibilities(self, target_array):
         global global_storage_df
