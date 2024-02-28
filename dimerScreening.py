@@ -61,11 +61,11 @@ def spurious_priming(vp_primer_region, hydr_probe_region, cp_primer_region, vari
     rev_primer = str(Seq(cp_primer_region).reverse_complement())
     
     nucleic_acids = [variable_probe, common_probe, hydr_probe_region, cp_primer_region, vp_primer_region, hydrolysis_probe, rev_primer]
-    
+
     success_indicator = 1
     
     for na in nucleic_acids:
-        primed = primer3.calc_heterodimer(variable_probe, na)
+        primed = primer3.calc_heterodimer(variable_probe, na, temp_c = 60)
         
         if primed.dg < -9000:
             success_indicator = 0
@@ -94,6 +94,10 @@ def primer_library_test(primer_dataframe, variable_probe, common_probe):
         
         if lig_success == 1 and pcr_success == 1:
             success_idx.append(index)
+        elif lig_success == 1 and pcr_success != 1:
+            print('pcr failed')
+        elif lig_success != 1 and pcr_success == 1:
+            print('ligation failed bc primers')
     
     return primer_df.iloc[success_idx]
     
