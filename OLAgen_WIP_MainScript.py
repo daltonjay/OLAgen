@@ -47,7 +47,7 @@ class genbankWindow(QDialog):
     
     def __init__(self):
         super(genbankWindow, self).__init__()
-        uic.loadUi("GUI/genbank_window.ui", self) #More universal across platforms KC 2/26
+        uic.loadUi("/Users/daltonjaynelson/Documents/Research/OLAgen/GUI/genbank_window.ui", self)
         self.show()
         
         self.genbuttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
