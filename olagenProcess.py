@@ -1,6 +1,3 @@
-
-#Branch Outdated
-
 # Copyright Dalton J. Nelson, 2024
 
 import sys

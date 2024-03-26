@@ -1,5 +1,3 @@
-
-#Branch Outdated
 # -*- coding: utf-8 -*-
 """
 Copyright: Dalton J. Nelson, Vanderbilt University
