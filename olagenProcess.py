@@ -1,3 +1,6 @@
+
+#Branch Outdated
+
 # Copyright Dalton J. Nelson, 2024
 
 import sys
@@ -9,6 +12,7 @@ import alignmentSource
 
 # def runOlagen(fastasOLA):
     
+
 #         print(fastasOLA)
 #         fastafiles = list(SeqIO.parse(fastasOLA, format = 'fasta'))
 
