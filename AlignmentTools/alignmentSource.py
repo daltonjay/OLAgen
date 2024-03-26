@@ -23,9 +23,13 @@ def clustAlign(fastaCompiledFile): # Works as desired for a singular input file 
 #clustAlign('seqs_trial.fasta')
 
 def mafftAlign(fastaCompiledFile): # works as desired for a singular input file as of Jan 31, 2024
-    cmd = ['wsl.exe', 'mafft', '--genafpair', '--out', 'outMafft.fasta', fastaCompiledFile]
-
     try:
+        # Convert Windows path to WSL path
+        wsl_path = fastaCompiledFile.replace('\\', '/').replace('C:', '/mnt/c')
+
+        # Construct the command
+        cmd = ['wsl.exe', 'bash', '-c', f"mafft --genafpair --out outMafft.fasta {wsl_path}"]
+
         # Execute the command
         subprocess.run(cmd, check=True)
         print("Command executed successfully.")
@@ -33,6 +37,7 @@ def mafftAlign(fastaCompiledFile): # works as desired for a singular input file 
         print(f"Error executing command: {e}")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+        
     #try:
         #cmd = ['wsl.exe',  'mafft', '--genafpair', fastaCompiledFile]  # Command to execute
         #cmd = ['mafft', fastaCompiledFile]  # Command to execute
