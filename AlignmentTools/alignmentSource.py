@@ -6,7 +6,9 @@ import subprocess
 
 def clustAlign(fastaCompiledFile): # Works as desired for a singular input file as of Jan 31, 2024
     
-    clustalo_cmd = ['./AlignmentTools/clustalo', '-i', fastaCompiledFile, '-o', 'outClustalo.fasta', '--outfmt=fasta', '--force']
+    clustalo_cmd = ['AlignmentTools\\clustalo.exe', '-i', fastaCompiledFile, '-o', 'outClustalo.fasta', '--outfmt=fasta', '--force']
+
+    #clustalo_cmd = ['./AlignmentTools/clustalo', '-i', fastaCompiledFile, '-o', 'outClustalo.fasta', '--outfmt=fasta', '--force']
     n = 0 
     # Execute the ClustalO command
     try:
@@ -37,7 +39,7 @@ def mafftAlign(fastaCompiledFile): # works as desired for a singular input file 
         print(f"Error executing command: {e}")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
-        
+
     #try:
         #cmd = ['wsl.exe',  'mafft', '--genafpair', fastaCompiledFile]  # Command to execute
         #cmd = ['mafft', fastaCompiledFile]  # Command to execute
