@@ -23,20 +23,31 @@ def clustAlign(fastaCompiledFile): # Works as desired for a singular input file 
 #clustAlign('seqs_trial.fasta')
 
 def mafftAlign(fastaCompiledFile): # works as desired for a singular input file as of Jan 31, 2024
+    cmd = ['wsl.exe', 'mafft', '--genafpair', '--out', 'outMafft.fasta', fastaCompiledFile]
 
     try:
-        cmd = ['mafft', '--genafpair', fastaCompiledFile]  # Command to execute
-        #cmd = ['mafft', fastaCompiledFile]  # Command to execute
-        
-        # Open a file for writing the output
-        with open('outMafft.fasta', 'w') as output_file:
-            # Execute the command and redirect output to the file
-            subprocess.run(cmd, stdout=output_file, check=True)
-        
+        # Execute the command
+        subprocess.run(cmd, check=True)
         print("Command executed successfully.")
     except subprocess.CalledProcessError as e:
         print(f"Error executing command: {e}")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+    #try:
+        #cmd = ['wsl.exe',  'mafft', '--genafpair', fastaCompiledFile]  # Command to execute
+        #cmd = ['mafft', fastaCompiledFile]  # Command to execute
+        #cmd = ['wsl.exe', 'mafft', '--genafpair', fastaCompiledFile] #forWindows
+   
+        # Open a file for writing the output
+        #with open('outMafft.fasta', 'w') as output_file:
+            # Execute the command and redirect output to the file
+            #subprocess.run(cmd, stdout=output_file, check=True)
+            #subprocess.run(' '.join(cmd), shell=True, check=True)
+        
+        #print("Command executed successfully.")
+    #except subprocess.CalledProcessError as e:
+        #print(f"Error executing command: {e}")
+    #except Exception as e:
+        #print(f"An unexpected error occurred: {e}")
         
 # mafftAlign('seqs_trial.fasta')
