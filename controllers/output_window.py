@@ -11,7 +11,8 @@ class OutputWindow(QDialog):
     
     def __init__(self):
         super(OutputWindow, self).__init__()
-        uic.loadUi('GUI/output_windowTAB.ui', self)
+        ui_path = os.path.join(os.path.dirname(__file__), '..', 'views', 'output_windowTAB.ui')
+        uic.loadUi(ui_path, self)
         
         self.csvExportBtn.clicked.connect(self.exportToCSV)
         self.homeButton.clicked.connect(self.promptMainWindow)
