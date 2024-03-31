@@ -5,7 +5,7 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5 import uic
 
 class genbankWindow(QDialog):
-#Kunal Test
+#Kunal's Test
     return_genbank_data = pyqtSignal(dict)
 
     def __init__(self):
@@ -31,7 +31,7 @@ class genbankWindow(QDialog):
         with open(target_file, 'w') as file:
             file.write(target_data)
 
-        # Run MAFFT for alignment (assuming mafft is in PATH and installed)
+        # Run MAFFT for alignment
         alignment_tool = "mafft" if self.mafft_checkbox.isChecked() else "clustalo"
         if alignment_tool == "mafft":
             alignment_command = ["mafft", "--auto", reference_file]
@@ -62,23 +62,3 @@ class genbankWindow(QDialog):
         main_window = olaGUI()
         widget.addWidget(main_window)
         widget.setCurrentIndex(widget.currentIndex() + 1)
-
-#KunalTest Old Code   
-#     def __init__(self):
-#         super(genbankWindow, self).__init__()
-#         uic.loadUi("GUI/genbank_window.ui", self)
-#         self.show()
-        
-#         self.genbuttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-#         self.genbuttonBox.accepted.connect(self.on_ok_clicked)
-#         self.genbuttonBox.rejected.connect(self.on_cancel_clicked)
-        
-#     def on_ok_clicked(self):
-#         output_window = outputWindow()
-#         widget.addWidget(output_window)
-#         widget.setCurrentIndex(widget.currentIndex()+1)
-        
-#     def on_cancel_clicked(self):
-#         main_window = olaGUI()
-#         widget.addWidget(main_window)
-#         widget.setCurrentIndex(widget.currentIndex()+1)

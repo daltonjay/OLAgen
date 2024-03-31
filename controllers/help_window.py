@@ -8,11 +8,11 @@ class HelpWindow(QDialog):
         
     def initUI(self):
         self.setWindowTitle('Help Window')
-        self.setGeometry(400, 400, 300, 200)
-        
+        self.setFixedSize(300, 200)  # Set a fixed size for the window
+
         layout = QVBoxLayout()
-        
+
         label = QLabel('This is a help window. Yet, there is no help. Good luck.')
         layout.addWidget(label)
-        
+
         self.setLayout(layout)

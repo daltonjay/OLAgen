@@ -1,38 +1,16 @@
-# -*- coding: utf-8 -*-
-"""
-Copyright: Dalton J. Nelson, Vanderbilt University
-First Created: April 2023
-Last Modified: January 29, 2024
-"""
-import sys
-import os
-import subprocess
+from PyQt5.QtWidgets import QDialog, QMessageBox, QFileDialog, QTableWidget, QTableWidgetItem
+from PyQt5 import uic  # If you're using .ui files for your layouts
+
+# For handling CSV operations
 import csv
-import pandas as pd
-from PyQt5 import QtWidgets
-from PyQt5.QtCore import (Qt, pyqtSignal, QStringListModel)
-from PyQt5.QtWidgets import *
-from PyQt5 import uic
-from Bio import SeqIO
-from PyQt5.QtWidgets import QWidget
-from olagenProcess import *
-from dimerScreening import *
 
-from controllerView.helpWindow import HelpWindow
-from controllerView.genbankWindow import genbankWindow
-from controllerView.fastaWindow import fastaWindow
+# If you're using Biopython's Seq
+from Bio.Seq import Seq
 
-global_muts = None
-target_names = None
-global_AA_seqs = None
-global_SeqIO_seqs = None
-global_storage_df = pd.DataFrame(columns = ['Target', 'SNP', 'VP_Probe', 'WT_Probe', 'CP_Probe'])
-primer_row_counter = -1        
-        
-class outputWindow(QDialog):
+class OutputWindow(QDialog):
     
     def __init__(self):
-        super(outputWindow, self).__init__()
+        super(OutputWindow, self).__init__()
         uic.loadUi('GUI/output_windowTAB.ui', self)
         
         self.csvExportBtn.clicked.connect(self.exportToCSV)
@@ -338,48 +316,3 @@ class outputWindow(QDialog):
         widget.addWidget(main_window)
         widget.setCurrentIndex(widget.currentIndex()+1)
     
-class olaGUI(QDialog):
-    
-    def __init__(self):
-        super(olaGUI, self).__init__()
-        uic.loadUi("GUI/main_window.ui", self)
-        self.show()
-        self.setWindowTitle('OLAgen')
-        
-        self.fasta_window = fastaWindow()
-        
-        self.fastaInputButton.clicked.connect(self.fastaInit)
-        self.helpButton.clicked.connect(self.helpPrompt)
-        self.genbankInputButton.clicked.connect(self.genbankPrompt)
-        
-    def fastaInit(self):
-        fasta_window = fastaWindow()
-        widget.addWidget(fasta_window)  # Add the instance to the widget stack
-        widget.setCurrentIndex(widget.currentIndex() + 1)  # Move to the newly added widget
-
-    def helpPrompt(self):
-        help_window = HelpWindow()
-        help_window.exec_()
-
-    def genbankPrompt(self):
-        genbank_window = genbankWindow()
-        widget.addWidget(genbank_window)  # Pass the instance, not the class
-        widget.setCurrentIndex(widget.currentIndex() + 1)
-       
-    def outputPrompt(self):
-        output_window = outputWindow()
-        widget.addWidget(output_window)
-        widget.setCurrentIndex(widget.currentIndex()+1)
-
-     
-app = QApplication([])
-dialog = fastaWindow()
-#dialog.return_global_var.connect(lambda var: print("Returned global variable:", var))
-widget = QtWidgets.QStackedWidget()
-main_window = olaGUI()
-widget.addWidget(main_window)
-widget.setFixedHeight(600)
-widget.setFixedWidth(800)
-widget.setWindowTitle("OLAgen")
-widget.show()
-sys.exit(app.exec_())
