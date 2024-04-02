@@ -1,10 +1,13 @@
+''' Copyright 2024, Dalton J. Nelson
+    Contributors: Kunal Chugh'''
+
 import os
 from PyQt5.QtWidgets import QDialog
 from PyQt5 import uic
 
 from .fasta_window import FastaWindow
 from .help_window import HelpWindow
-from .genbank_window import GenbankWindow
+# from .genbank_window import GenbankWindow
 
 # Main window UI and controller
 class MainWindow(QDialog):
@@ -18,7 +21,7 @@ class MainWindow(QDialog):
 
         self.fastaInputButton.clicked.connect(self.openFastaWindow)
         self.helpButton.clicked.connect(self.openHelpWindow)
-        self.genbankInputButton.clicked.connect(self.openGenbankWindow)
+        # self.genbankInputButton.clicked.connect(self.openGenbankWindow)
 
     def openFastaWindow(self):
         if not hasattr(self, 'fasta_window'):
@@ -31,8 +34,8 @@ class MainWindow(QDialog):
             self.help_window = HelpWindow()
         self.help_window.exec_()
 
-    def openGenbankWindow(self):
-        if not hasattr(self, 'genbank_window'):
-            self.genbank_window = GenbankWindow(global_state=self.global_state)
-            self.global_state.mainWidget.addWidget(self.genbank_window)
-        self.global_state.mainWidget.setCurrentIndex(self.global_state.mainWidget.indexOf(self.genbank_window))
+    # def openGenbankWindow(self): # Saved for another time.
+    #     if not hasattr(self, 'genbank_window'):
+    #         self.genbank_window = GenbankWindow(global_state=self.global_state)
+    #         self.global_state.mainWidget.addWidget(self.genbank_window)
+    #     self.global_state.mainWidget.setCurrentIndex(self.global_state.mainWidget.indexOf(self.genbank_window))
