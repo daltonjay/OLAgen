@@ -16,7 +16,7 @@ def main():
     global_state = GlobalState()
 
     # Pass the global state to the main window
-    main_window = MainWindow(global_state=global_state)
+    main_window = MainWindow(global_state = global_state)
     main_window.show()
 
     sys.exit(app.exec_())
