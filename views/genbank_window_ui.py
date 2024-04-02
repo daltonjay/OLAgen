@@ -1,66 +1,55 @@
-# -*- coding: utf-8 -*-
+import os
+import requests
+from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QMessageBox
+from PyQt5 import uic
 
-################################################################################
-## Form generated from reading UI file 'genbank_window.ui'
-##
-## Created by: Qt User Interface Compiler version 6.6.1
-##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
-################################################################################
+from .output_window import OutputWindow
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractButton, QApplication, QCheckBox, QDialog,
-    QDialogButtonBox, QLabel, QLineEdit, QSizePolicy,
-    QWidget)
+# Genbank window UI and controller
+class GenbankWindow(QDialog):
 
-class Ui_genbankWindow(object):
-    def setupUi(self, genbankWindow):
-        if not genbankWindow.objectName():
-            genbankWindow.setObjectName(u"genbankWindow")
-        genbankWindow.resize(800, 600)
-        self.lineEdit_ref_genbank = QLineEdit(genbankWindow)
-        self.lineEdit_ref_genbank.setObjectName(u"lineEdit_ref_genbank")
-        self.lineEdit_ref_genbank.setGeometry(QRect(480, 170, 113, 21))
-        self.genbuttonBox = QDialogButtonBox(genbankWindow)
-        self.genbuttonBox.setObjectName(u"genbuttonBox")
-        self.genbuttonBox.setGeometry(QRect(320, 320, 164, 32))
-        self.genbuttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
-        self.label = QLabel(genbankWindow)
-        self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(220, 170, 261, 20))
-        self.checkBox = QCheckBox(genbankWindow)
-        self.checkBox.setObjectName(u"checkBox")
-        self.checkBox.setGeometry(QRect(410, 260, 87, 20))
-        self.checkBox_2 = QCheckBox(genbankWindow)
-        self.checkBox_2.setObjectName(u"checkBox_2")
-        self.checkBox_2.setGeometry(QRect(410, 280, 121, 20))
-        self.label_2 = QLabel(genbankWindow)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(230, 220, 241, 20))
-        self.label_3 = QLabel(genbankWindow)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.setGeometry(QRect(300, 270, 101, 20))
-        self.lineEdit_target_genbank = QLineEdit(genbankWindow)
-        self.lineEdit_target_genbank.setObjectName(u"lineEdit_target_genbank")
-        self.lineEdit_target_genbank.setGeometry(QRect(470, 220, 113, 21))
+    def __init__(self, global_state):
+        super(GenbankWindow, self).__init__()
+        ui_path = os.path.join(os.path.dirname(__file__), '..', 'views', 'genbank_window.ui')
+        uic.loadUi(ui_path, self)
+        self.show()
 
-        self.retranslateUi(genbankWindow)
+        self.global_state = global_state  # Store the global_state instance
 
-        QMetaObject.connectSlotsByName(genbankWindow)
-    # setupUi
+        self.genbuttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        self.genbuttonBox.accepted.connect(self.fetch_genbank_data)
+        self.genbuttonBox.rejected.connect(self.returnHome)
 
-    def retranslateUi(self, genbankWindow):
-        genbankWindow.setWindowTitle(QCoreApplication.translate("genbankWindow", u"Dialog", None))
-        self.label.setText(QCoreApplication.translate("genbankWindow", u"Reference Sequence GenBank Accession:", None))
-        self.checkBox.setText(QCoreApplication.translate("genbankWindow", u"mafft", None))
-        self.checkBox_2.setText(QCoreApplication.translate("genbankWindow", u"Clustal Omega", None))
-        self.label_2.setText(QCoreApplication.translate("genbankWindow", u"Target Sequence GenBank Accession:", None))
-        self.label_3.setText(QCoreApplication.translate("genbankWindow", u"Alignment Tool:", None))
-    # retranslateUi
+    def fetch_genbank_data(self):
+        reference_accession = self.lineEdit_ref_genbank.text().strip()
+        target_accession = self.lineEdit_target_genbank.text().strip()
 
+        if reference_accession and target_accession:
+            reference_sequence = self.get_sequence(reference_accession)
+            target_sequence = self.get_sequence(target_accession)
+
+            if reference_sequence and target_sequence:
+                # Store sequences in global_state or process them as needed
+                self.openOutput()
+            else:
+                QMessageBox.warning(self, "Error", "Failed to fetch sequences from GenBank.")
+        else:
+            QMessageBox.warning(self, "Error", "Please enter both reference and target GenBank accessions.")
+
+    def get_sequence(self, accession):
+        url = f"https://api.ncbi.nlm.nih.gov/datasets/v1/genome/accession/{accession}/sequence"
+        response = requests.get(url)
+        if response.ok:
+            return response.text
+        else:
+            QMessageBox.warning(self, "Error", f"Failed to fetch sequence for accession {accession}.")
+            return None
+
+    def openOutput(self):
+        if not hasattr(self, 'output_window'):
+            self.output_window = OutputWindow(global_state=self.global_state)
+            self.global_state.mainWidget.addWidget(self.output_window)
+        self.global_state.mainWidget.setCurrentIndex(self.global_state.mainWidget.indexOf(self.output_window))
+
+    def returnHome(self):
+        self.global_state.mainWidget.setCurrentIndex(0)
