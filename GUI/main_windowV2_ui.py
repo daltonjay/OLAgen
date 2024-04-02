@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_window.ui'
+## Form generated from reading UI file 'main_windowV2.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.6.1
 ##
@@ -25,7 +25,7 @@ class Ui_Dialog(object):
         Dialog.resize(800, 600)
         self.olaLogo = QLabel(Dialog)
         self.olaLogo.setObjectName(u"olaLogo")
-        self.olaLogo.setGeometry(QRect(150, 90, 541, 231))
+        self.olaLogo.setGeometry(QRect(130, 70, 541, 231))
         self.olaLogo.setPixmap(QPixmap(u"OLAgenLogoC.png"))
         self.olaLogo.setScaledContents(True)
         self.horizontalLayoutWidget = QWidget(Dialog)
@@ -42,13 +42,6 @@ class Ui_Dialog(object):
         self.fastaInputButton.setCursor(QCursor(Qt.PointingHandCursor))
 
         self.horizontalLayout.addWidget(self.fastaInputButton)
-
-        self.genbankInputButton = QPushButton(self.horizontalLayoutWidget)
-        self.genbankInputButton.setObjectName(u"genbankInputButton")
-        self.genbankInputButton.setFont(font)
-        self.genbankInputButton.setCursor(QCursor(Qt.PointingHandCursor))
-
-        self.horizontalLayout.addWidget(self.genbankInputButton)
 
         self.helpButton = QPushButton(self.horizontalLayoutWidget)
         self.helpButton.setObjectName(u"helpButton")
@@ -67,7 +60,6 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
         self.olaLogo.setText("")
         self.fastaInputButton.setText(QCoreApplication.translate("Dialog", u"Upload .fasta", None))
-        self.genbankInputButton.setText(QCoreApplication.translate("Dialog", u"Use GenBank", None))
         self.helpButton.setText(QCoreApplication.translate("Dialog", u"Help", None))
     # retranslateUi
 

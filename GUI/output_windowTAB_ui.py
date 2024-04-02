@@ -28,7 +28,7 @@ class Ui_outputDialog(object):
         self.logoLabel = QLabel(outputDialog)
         self.logoLabel.setObjectName(u"logoLabel")
         self.logoLabel.setGeometry(QRect(330, 10, 151, 61))
-        self.logoLabel.setPixmap(QPixmap(u"OLAgenLogo.png"))
+        self.logoLabel.setPixmap(QPixmap(u"OLAgenLogoC.png"))
         self.logoLabel.setScaledContents(True)
         self.verticalLayoutWidget = QWidget(outputDialog)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")

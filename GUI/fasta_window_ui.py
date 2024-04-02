@@ -30,7 +30,7 @@ class Ui_Dialog(object):
         self.logoLabel = QLabel(Dialog)
         self.logoLabel.setObjectName(u"logoLabel")
         self.logoLabel.setGeometry(QRect(310, 20, 191, 81))
-        self.logoLabel.setPixmap(QPixmap(u"OLAgenLogo.png"))
+        self.logoLabel.setPixmap(QPixmap(u"OLAgenLogoC.png"))
         self.logoLabel.setScaledContents(True)
         self.fileUplBtn = QPushButton(Dialog)
         self.fileUplBtn.setObjectName(u"fileUplBtn")
