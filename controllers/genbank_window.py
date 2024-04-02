@@ -4,9 +4,10 @@ from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QDialogButtonBox
 from PyQt5.QtCore import pyqtSignal
 from PyQt5 import uic
 
-class genbankWindow(QDialog):
+class GenbankWindow(QDialog):
 #Kunal's Test
     return_genbank_data = pyqtSignal(dict)
+    switch_view = pyqtSignal(str)  # Signal to indicate view switch
 
     def __init__(self):
         super(genbankWindow, self).__init__()
@@ -51,14 +52,9 @@ class genbankWindow(QDialog):
         else:
             raise Exception(f"Failed to fetch data for accession {accession}")
 
-    def on_ok_clicked(self):
-        # Switch to the outputWindow and pass the data
-        output_window = outputWindow()
-        widget.addWidget(output_window)
-        widget.setCurrentIndex(widget.currentIndex() + 1)
-        self.return_genbank_data.connect(output_window.display_data)  # Connect the signal to the display_data slot of the outputWindow
+    def returnHome(self):
+        self.switch_view.emit('home')
 
-    def on_cancel_clicked(self):
-        main_window = olaGUI()
-        widget.addWidget(main_window)
-        widget.setCurrentIndex(widget.currentIndex() + 1)
+    def openOutput(self):
+        if self.user_fasta_file and (self.clustalCheck.isChecked() or self.mafftCheck.isChecked()):
+            self.switch_view.emit('output')

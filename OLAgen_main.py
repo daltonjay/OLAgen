@@ -5,23 +5,19 @@ First Created: April 2023
 Last Modified: January 29, 2024
 """
 import sys
-import pandas as pd
 from PyQt5.QtWidgets import QApplication
-from controllers.main_window import mainWindow
+from controllers.main_window import MainWindow 
+from models.global_state import GlobalState
 
-#FIXME: Global Var Relocation
-global_muts = None
-target_names = None
-global_AA_seqs = None
-global_SeqIO_seqs = None
-global_storage_df = pd.DataFrame(columns = ['Target', 'SNP', 'VP_Probe', 'WT_Probe', 'CP_Probe'])
-primer_row_counter = -1        
-     
 def main():
     app = QApplication(sys.argv)
 
-    mainWindow = mainWindow()
-    mainWindow.show()
+    # Initialize the global state
+    global_state = GlobalState()
+
+    # Pass the global state to the main window
+    main_window = MainWindow(global_state=global_state)
+    main_window.show()
 
     sys.exit(app.exec_())
 

@@ -1,22 +1,9 @@
 # Copyright Dalton J. Nelson, 2024
 
-import sys
-import os
 from Bio import SeqIO
 from Bio.Seq import Seq
 
-# Get the directory of the current script
-current_dir = os.path.dirname(os.path.abspath(__file__))
-
-# Get the parent directory (your_project)
-parent_dir = os.path.dirname(current_dir)
-
-# Add the parent directory to sys.path if not already present
-if parent_dir not in sys.path:
-    sys.path.insert(0, parent_dir)
-
-# Now you can import alignmentSource from AlignmentTools
-from AlignmentTools import alignmentSource
+from .alignments.alignmentSource import *
         
 def runMafftAlignment(fastasOLA): # here, I will separate the standard alignment -- perhaps call alignmentSource instead
         

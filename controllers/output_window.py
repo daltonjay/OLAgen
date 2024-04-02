@@ -1,22 +1,33 @@
+import os
+import sys
 from PyQt5.QtWidgets import QDialog, QMessageBox, QFileDialog, QTableWidget, QTableWidgetItem
-from PyQt5 import uic  # If you're using .ui files for your layouts
-
-# For handling CSV operations
+from PyQt5 import uic
+from PyQt5.QtCore import pyqtSignal
 import csv
-
-# If you're using Biopython's Seq
 from Bio.Seq import Seq
+import pandas as pd
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_dir = os.path.dirname(current_dir)
+if project_dir not in sys.path:
+    sys.path.insert(0, project_dir)
+
+from utils.olagenProcess import *
+from utils.dimerScreening import *
 
 class OutputWindow(QDialog):
-    
-    def __init__(self):
+    switch_view = pyqtSignal(str)  # Signal to indicate view switch
+
+    def __init__(self, global_state):
         super(OutputWindow, self).__init__()
         ui_path = os.path.join(os.path.dirname(__file__), '..', 'views', 'output_windowTAB.ui')
         uic.loadUi(ui_path, self)
+
+        self.global_state = global_state  # Store the GlobalState instance
         
         self.csvExportBtn.clicked.connect(self.exportToCSV)
         self.homeButton.clicked.connect(self.promptMainWindow)
-        self.targetLst.addItems(target_names)
+        self.targetLst.addItems(self.global_state.target_names)
         self.targetLst.itemSelectionChanged.connect(self.update_table)
         self.addSOIBtn.clicked.connect(self.addLigationSet)
         self.genPrimerBtn.clicked.connect(self.generate_primers)
@@ -73,8 +84,8 @@ class OutputWindow(QDialog):
         
         if selected_target:
             selected_item = selected_target[0].text()
-            values = viability_test(global_muts, selected_item) # get OLA testable SNPs
-            full_region , VP_region, CP_region, WT_region = viableSNP_sequences(global_SeqIO_seqs, selected_item, values)
+            values = viability_test(self.global_state.global_muts(), selected_item) # get OLA testable SNPs
+            full_region , VP_region, CP_region, WT_region = viableSNP_sequences(self.global_state.global_SeqIO_seqs(), selected_item, values)
 
             # Clear existing table
             self.probeTable.clearContents()
@@ -127,7 +138,7 @@ class OutputWindow(QDialog):
 
                 current_row_count = self.probeTable.rowCount()
                 self.probeTable.setRowCount(current_row_count + 1)
-                full_region , VP_region, CP_region, WT_region = viableSNP_sequences(global_SeqIO_seqs, selected_item, snp_value, 'reorient')
+                full_region , VP_region, CP_region, WT_region = viableSNP_sequences(self.global_state.global_SeqIO_seqs(), selected_item, snp_value, 'reorient')
                 print(VP_region, CP_region, WT_region)
                 itemSNP = QTableWidgetItem(snp_value[0]+'(-)')
                 itemVP = QTableWidgetItem(str(VP_region[snp_value[0]]))
@@ -312,8 +323,6 @@ class OutputWindow(QDialog):
                 QMessageBox.critical(self, "Error", f"Error exporting data: {str(e)}")
 
      
-    def promptMainWindow(self):
-        main_window = olaGUI()
-        widget.addWidget(main_window)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+    def returnHome(self):
+        self.switch_view.emit('home')
     

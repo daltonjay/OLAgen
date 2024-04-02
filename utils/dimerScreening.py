@@ -2,6 +2,7 @@
 
 # Primer and ligation probe assessment tools
 
+import os
 import primer3
 from Bio.Seq import Seq
 import pandas as pd # pip install pandas and pip install openpyxl
@@ -15,7 +16,9 @@ E484K_vp = 'ggtagcacaccttgtaatggtgtta'
 
 # Import primer_library 
 
-primer_df = pd.read_excel('primer_library.xlsx')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+primer_library_path = os.path.join(current_dir, 'primer_library.xlsx')
+primer_df = pd.read_excel(primer_library_path)
 
 def probe_spurious_ligation(variable_probe, common_probe):
     

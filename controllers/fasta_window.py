@@ -1,7 +1,7 @@
 import os
 from Bio import SeqIO
 from PyQt5.QtCore import pyqtSignal, QStringListModel
-from PyQt5.QtWidgets import QDialog, QFileDialog, QVBoxLayout, QLabel
+from PyQt5.QtWidgets import QDialog, QFileDialog
 from PyQt5 import uic
 import sys
 
@@ -13,15 +13,16 @@ if project_dir not in sys.path:
 from utils.olagenProcess import *
 
 class FastaWindow(QDialog):
-    
     return_global_dict = pyqtSignal(dict)
     return_global_list = pyqtSignal(list)
     switch_view = pyqtSignal(str)  # Signal to indicate view switch
     
-    def __init__(self):
+    def __init__(self, global_state):
         super(FastaWindow, self).__init__()
         ui_path = os.path.join(os.path.dirname(__file__), '..', 'views', 'fasta_window.ui')
         uic.loadUi(ui_path, self)
+        
+        self.global_state = global_state  # Store the GlobalState instance
         
         self.setWindowTitle('OLAgen - .fasta run')
         self.fileUplBtn.clicked.connect(self.fastaUpload)
@@ -57,13 +58,12 @@ class FastaWindow(QDialog):
         self.userFileLabel.setText("<i>" + text + "</i>")
         
     def update_entryList(self, file_path):  
-        global target_names
         fastafiles = list(SeqIO.parse(file_path, format = 'fasta'))
         
         # Confirm the file loaded properly
         elements = [entry.id for entry in fastafiles]
-        target_names = elements
-        self.return_global_list.emit(target_names)
+        self.global_state.target_names = elements  # Update the global state
+        self.return_global_list.emit(elements)
         
         model = self.entryIDList.model()
         if model is None:
@@ -78,50 +78,44 @@ class FastaWindow(QDialog):
     def clustalBoxClicked(self, state):
         if state == 2: # Checked State
             self.mafftCheck.setChecked(False)
-            
+
     def alignByCheck(self):
-        global global_muts
-        global global_AA_seqs
-        global global_SeqIO_seqs
-        
         if self.user_fasta_file:
             if self.mafftCheck.isChecked():
                 self.statusLabel.setText('')
                 
                 alignedAAs, alignedNTs, seqIO_data = runMafftAlignment(self.user_fasta_file)
-                global_AA_seqs = alignedAAs
+                self.global_state.global_AA_seqs = alignedAAs
                 selected_indexes = self.entryIDList.selectedIndexes()
                 if selected_indexes:
                     selected_index = selected_indexes[0]
                     reference_sequence = selected_index.data()
                     
                     mut_out_AAs = self.getMutations(alignedAAs, reference_sequence)
-                    global_muts = mut_out_AAs
-                    global_SeqIO_seqs = seqIO_data
-                    #mut_out_NTs = self.getMutations(alignedNTs)
-                    self.return_global_dict.emit(global_muts)
+                    self.global_state.global_muts = mut_out_AAs
+                    self.global_state.global_SeqIO_seqs = seqIO_data
+                    self.return_global_dict.emit(mut_out_AAs)
                 
             elif self.clustalCheck.isChecked():
                 self.statusLabel.setText('')
                 
                 alignedAAs, alignedNTs, seqIO_data = runClustAlignment(self.user_fasta_file)
-                global_AA_seqs = alignedAAs
+                self.global_state.global_AA_seqs = alignedAAs
                 selected_indexes = self.entryIDList.selectedIndexes()
                 if selected_indexes:
                     selected_index = selected_indexes[0]
                     reference_sequence = selected_index.data()
                     
                     mut_out_AAs = self.getMutations(alignedAAs, reference_sequence)
-                    global_muts = mut_out_AAs
-                    global_SeqIO_seqs = seqIO_data
-                    #mut_out_NTs = self.getMutations(alignedNTs)
-                    self.return_global_dict.emit(global_muts)
+                    self.global_state.global_muts = mut_out_AAs
+                    self.global_state.global_SeqIO_seqs = seqIO_data
+                    self.return_global_dict.emit(mut_out_AAs)
                 
-            else: 
+            else:
                 self.statusLabel.setText('Please select an alignment method.')
         else:
             self.statusLabel.setText('Please select a .fasta file.')
-    
+
     def getMutations(self, pre_aligned_input, ref_ID):
         mutations = {}
         for item in pre_aligned_input:
