@@ -1,4 +1,5 @@
 import pandas as pd
+from PyQt5 import QtWidgets
 
 class GlobalState:
     def __init__(self):
@@ -8,6 +9,7 @@ class GlobalState:
         self._global_SeqIO_seqs = None
         self._global_storage_df = pd.DataFrame(columns=['Target', 'SNP', 'VP_Probe', 'WT_Probe', 'CP_Probe'])
         self._primer_row_counter = -1
+        self.widget = QtWidgets.QStackedWidget()
 
     @property
     def global_muts(self):
@@ -56,3 +58,7 @@ class GlobalState:
     @primer_row_counter.setter
     def primer_row_counter(self, value):
         self._primer_row_counter = value
+
+    @property
+    def mainWidget(self):
+        return self.widget
