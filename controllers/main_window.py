@@ -13,7 +13,7 @@ from .help_window import HelpWindow
 class MainWindow(QDialog):
     def __init__(self, global_state, parent=None):
         super(MainWindow, self).__init__(parent)
-        ui_path = os.path.join(os.path.dirname(__file__), '..', 'views', 'main_window.ui')
+        ui_path = os.path.join(os.path.dirname(__file__), '..', 'views', 'main_windowV2.ui')
         uic.loadUi(ui_path, self)
         self.setWindowTitle('OLAgen')
 
