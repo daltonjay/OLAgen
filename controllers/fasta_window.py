@@ -1,6 +1,5 @@
 ''' Copyright 2024, Dalton J. Nelson
     Contributors: Kunal Chugh
-    This file will be deployed in a later version.
     '''
 
 import os
