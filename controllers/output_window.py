@@ -26,7 +26,7 @@ class OutputWindow(QDialog):
         self.global_state = global_state  # Store the GlobalState instance
         
         self.csvExportBtn.clicked.connect(self.exportToCSV)
-        self.homeButton.clicked.connect(self.promptMainWindow)
+        self.homeButton.clicked.connect(self.returnHome)
         self.targetLst.addItems(self.global_state.target_names)
         self.targetLst.itemSelectionChanged.connect(self.update_table)
         self.addSOIBtn.clicked.connect(self.addLigationSet)
@@ -84,8 +84,8 @@ class OutputWindow(QDialog):
         
         if selected_target:
             selected_item = selected_target[0].text()
-            values = viability_test(self.global_state.global_muts(), selected_item) # get OLA testable SNPs
-            full_region , VP_region, CP_region, WT_region = viableSNP_sequences(self.global_state.global_SeqIO_seqs(), selected_item, values)
+            values = viability_test(self.global_state.global_muts, selected_item) # get OLA testable SNPs
+            full_region , VP_region, CP_region, WT_region = viableSNP_sequences(self.global_state.global_SeqIO_seqs, selected_item, values)
 
             # Clear existing table
             self.probeTable.clearContents()
@@ -138,7 +138,7 @@ class OutputWindow(QDialog):
 
                 current_row_count = self.probeTable.rowCount()
                 self.probeTable.setRowCount(current_row_count + 1)
-                full_region , VP_region, CP_region, WT_region = viableSNP_sequences(self.global_state.global_SeqIO_seqs(), selected_item, snp_value, 'reorient')
+                full_region , VP_region, CP_region, WT_region = viableSNP_sequences(self.global_state.global_SeqIO_seqs, selected_item, snp_value, 'reorient')
                 print(VP_region, CP_region, WT_region)
                 itemSNP = QTableWidgetItem(snp_value[0]+'(-)')
                 itemVP = QTableWidgetItem(str(VP_region[snp_value[0]]))
@@ -159,12 +159,12 @@ class OutputWindow(QDialog):
                 self.store_possibilities(target_specific_array)
     
     def store_possibilities(self, target_array):
-        global global_storage_df
-        
         transposed_array = [[row[i] for row in target_array] for i in range(len(target_array[0]))]
-        new_data = pd.DataFrame(transposed_array, columns = ['Target', 'SNP', 'VP_Probe', 'WT_Probe', 'CP_Probe'])
-        
-        global_storage_df = pd.concat([global_storage_df, new_data])
+        new_data = pd.DataFrame(transposed_array, columns=['Target', 'SNP', 'VP_Probe', 'WT_Probe', 'CP_Probe'])
+
+        # Update global_storage_df using the global_state instance
+        self.global_state.global_storage_df = pd.concat([self.global_state.global_storage_df, new_data])
+
             
     def addLigationSet(self):
         selectedSOI = self.probeTable.selectedItems()
@@ -324,5 +324,5 @@ class OutputWindow(QDialog):
 
      
     def returnHome(self):
-        self.switch_view.emit('home')
+        self.global_state.mainWidget.setCurrentIndex(0)
     

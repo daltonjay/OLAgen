@@ -4,7 +4,6 @@ from PyQt5 import uic
 from .fasta_window import FastaWindow
 from .help_window import HelpWindow
 from .genbank_window import GenbankWindow
-from .output_window import OutputWindow
 
 class MainWindow(QDialog):
     def __init__(self, global_state, parent=None):
@@ -35,9 +34,3 @@ class MainWindow(QDialog):
             self.genbank_window = GenbankWindow(global_state=self.global_state)
             self.global_state.mainWidget.addWidget(self.genbank_window)
         self.global_state.mainWidget.setCurrentIndex(self.global_state.mainWidget.indexOf(self.genbank_window))
-
-    def openOutputWindow(self):
-        if not hasattr(self, 'output_window'):
-            self.output_window = OutputWindow(global_state=self.global_state)
-            self.global_state.mainWidget.addWidget(self.output_window)
-        self.global_state.mainWidget.setCurrentIndex(self.global_state.mainWidget.indexOf(self.output_window))

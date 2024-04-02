@@ -4,6 +4,7 @@ from PyQt5.QtCore import pyqtSignal, QStringListModel
 from PyQt5.QtWidgets import QDialog, QFileDialog
 from PyQt5 import uic
 import sys
+from .output_window import OutputWindow
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 project_dir = os.path.dirname(current_dir)
@@ -123,9 +124,11 @@ class FastaWindow(QDialog):
         return mutations
     
     def returnHome(self):
-        self.switch_view.emit('home')
+        self.global_state.mainWidget.setCurrentIndex(0)
 
     def openOutput(self):
-        if self.user_fasta_file and (self.clustalCheck.isChecked() or self.mafftCheck.isChecked()):
-            self.switch_view.emit('output')
+        if not hasattr(self, 'output_window'):
+            self.output_window = OutputWindow(global_state=self.global_state)
+            self.global_state.mainWidget.addWidget(self.output_window)
+        self.global_state.mainWidget.setCurrentIndex(self.global_state.mainWidget.indexOf(self.output_window))
         
