@@ -8,6 +8,7 @@ from PyQt5 import uic
 from .output_window import OutputWindow
 
 # Genbank window UI and controller
+#https://www.ncbi.nlm.nih.gov/datasets/docs/v2/languages/
 class GenbankWindow(QDialog):
 
     def __init__(self, global_state):
