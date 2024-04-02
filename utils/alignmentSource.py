@@ -4,23 +4,38 @@
 
 import subprocess
 
+# def clustAlign(fastaCompiledFile): # Works as desired for a singular input file as of Jan 31, 2024
+    
+#     clustalo_cmd = ['AlignmentTools\\clustalo.exe', '-i', fastaCompiledFile, '-o', 'outClustalo.fasta', '--outfmt=fasta', '--force']
+
+#     #clustalo_cmd = ['./AlignmentTools/clustalo', '-i', fastaCompiledFile, '-o', 'outClustalo.fasta', '--outfmt=fasta', '--force']
+#     n = 0 
+#     # Execute the ClustalO command
+#     try:
+#         # Run the ClustalO command
+#         # Here, add a loading indicator rather than a progress bar
+#         subprocess.run(clustalo_cmd, check=True)
+#         print("ClustalO alignment completed successfully.")
+#         n = 1
+#         return n
+#     except subprocess.CalledProcessError as e:
+#         # Handle any errors that occur during command execution
+#         print("Error executing ClustalO:", e)
 def clustAlign(fastaCompiledFile): # Works as desired for a singular input file as of Jan 31, 2024
     
-    clustalo_cmd = ['AlignmentTools\\clustalo.exe', '-i', fastaCompiledFile, '-o', 'outClustalo.fasta', '--outfmt=fasta', '--force']
+    # Adjust the path to the clustalo.exe executable as needed
+    clustalo_cmd = ['alignments\\clustalo.exe', '-i', fastaCompiledFile, '-o', 'outClustalo.fasta', '--outfmt=fasta', '--force']
 
-    #clustalo_cmd = ['./AlignmentTools/clustalo', '-i', fastaCompiledFile, '-o', 'outClustalo.fasta', '--outfmt=fasta', '--force']
-    n = 0 
     # Execute the ClustalO command
     try:
         # Run the ClustalO command
-        # Here, add a loading indicator rather than a progress bar
         subprocess.run(clustalo_cmd, check=True)
         print("ClustalO alignment completed successfully.")
-        n = 1
-        return n
+        return 1
     except subprocess.CalledProcessError as e:
         # Handle any errors that occur during command execution
         print("Error executing ClustalO:", e)
+        return 0
         
 #clustAlign('seqs_trial.fasta')
 

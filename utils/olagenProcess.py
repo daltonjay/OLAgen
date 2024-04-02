@@ -3,7 +3,7 @@
 from Bio import SeqIO
 from Bio.Seq import Seq
 
-from .alignments.alignmentSource import *
+from .alignmentSource import *
         
 def runMafftAlignment(fastasOLA): # here, I will separate the standard alignment -- perhaps call alignmentSource instead
         
