@@ -49,7 +49,7 @@ class GenbankWindow(QDialog):
         response = requests.get(url)
         if response.ok:
             # Define the path where you want to extract the zip file
-            extraction_path = os.path.join(os.path.dirname(__file__), '..', 'extracted_data')
+            extraction_path = os.path.join(os.path.dirname(__file__), '..', 'extractedData')
 
             # Create the extraction path if it doesn't exist
             os.makedirs(extraction_path, exist_ok=True)

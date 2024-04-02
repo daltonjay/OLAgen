@@ -26,7 +26,7 @@ class Ui_Dialog(object):
         self.olaLogo = QLabel(Dialog)
         self.olaLogo.setObjectName(u"olaLogo")
         self.olaLogo.setGeometry(QRect(130, 70, 541, 231))
-        self.olaLogo.setPixmap(QPixmap(u"OLAgenLogoC.png"))
+        self.olaLogo.setPixmap(QPixmap(u"OLAgenLogo.png"))
         self.olaLogo.setScaledContents(True)
         self.horizontalLayoutWidget = QWidget(Dialog)
         self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
