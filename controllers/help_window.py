@@ -1,3 +1,6 @@
+''' Copyright 2024, Dalton J. Nelson
+    Contributors: Kunal Chugh'''
+
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel
 
 # Help dialog UI and controller
