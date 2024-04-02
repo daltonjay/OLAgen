@@ -1,4 +1,8 @@
-# Copyright 2024, Dalton J. Nelson
+"""
+Copyright: Dalton J. Nelson, Vanderbilt University
+First Created: April 2023
+Last Modified: March 28, 2024
+"""
 
 # Primer and ligation probe assessment tools
 
@@ -6,8 +10,8 @@ import primer3
 from Bio.Seq import Seq
 import pandas as pd # pip install pandas and pip install openpyxl
 
-E484_cp = 'aaggttttaattgttactttccttta'
-E484K_vp = 'ggtagcacaccttgtaatggtgtta'
+# E484_cp = 'aaggttttaattgttactttccttta'
+# E484K_vp = 'ggtagcacaccttgtaatggtgtta'
 # E484WT_vp = 'ggtagcacaccttgtaatggtgttg'
 # E484_VP_Primer_Region = 'GTTAAGGGAGTGAAGACGATCAGA' # Equal to the forward primer
 # E484_CP_Primer_Region = 'TTATGAGAAATCAAAGTCTTTGGGTT'
@@ -102,4 +106,4 @@ def primer_library_test(primer_dataframe, variable_probe, common_probe):
     return primer_df.iloc[success_idx]
     
     
-primer_library_test(primer_df, E484K_vp, E484_cp)
+#primer_library_test(primer_df, E484K_vp, E484_cp)
