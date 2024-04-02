@@ -3,23 +3,25 @@ import subprocess
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QDialogButtonBox
 from PyQt5.QtCore import pyqtSignal
 from PyQt5 import uic
+import os
+from .output_window import OutputWindow
 
 class GenbankWindow(QDialog):
-#Kunal's Test
     return_genbank_data = pyqtSignal(dict)
     switch_view = pyqtSignal(str)  # Signal to indicate view switch
 
-    def __init__(self):
+    def __init__(self, global_state):
         super(GenbankWindow, self).__init__()
-        uic.loadUi("GUI/genbank_window.ui", self)
-        self.show()
+        ui_path = os.path.join(os.path.dirname(__file__), '..', 'views', 'genbank_window.ui')
+        uic.loadUi(ui_path, self)
+
+        self.global_state = global_state  # Store the global_state instance
 
         self.genbuttonBox.accepted.connect(self.on_ok_clicked)
         self.genbuttonBox.rejected.connect(self.on_cancel_clicked)
         self.genbuttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.fetch_genbank_data)
 
     def fetch_genbank_data(self):
-
         # Fetch the sequences from GenBank
         reference_data = self.fetch_sequence_data(self.reference_accession)
         target_data = self.fetch_sequence_data(self.target_accession)
@@ -53,8 +55,10 @@ class GenbankWindow(QDialog):
             raise Exception(f"Failed to fetch data for accession {accession}")
 
     def returnHome(self):
-        self.switch_view.emit('home')
+        self.global_state.mainWidget.setCurrentIndex(0)
 
     def openOutput(self):
-        if self.user_fasta_file and (self.clustalCheck.isChecked() or self.mafftCheck.isChecked()):
-            self.switch_view.emit('output')
+        if not hasattr(self, 'output_window'):
+            self.output_window = OutputWindow(global_state=self.global_state)
+            self.global_state.mainWidget.addWidget(self.output_window)
+        self.global_state.mainWidget.setCurrentIndex(self.global_state.mainWidget.indexOf(self.output_window))
