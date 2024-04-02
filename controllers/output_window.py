@@ -1,3 +1,6 @@
+''' Copyright 2024, Dalton J. Nelson
+    Contributors: Kunal Chugh'''
+
 import os
 import sys
 import csv
