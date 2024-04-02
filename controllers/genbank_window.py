@@ -1,5 +1,7 @@
 import os
 import requests
+import zipfile
+import time
 from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QMessageBox
 from PyQt5 import uic
 
@@ -37,10 +39,28 @@ class GenbankWindow(QDialog):
             QMessageBox.warning(self, "Error", "Please enter both reference and target GenBank accessions.")
 
     def get_sequence(self, accession):
-        url = f"https://api.ncbi.nlm.nih.gov/datasets/v1/genome/accession/{accession}/sequence"
+        url = f"https://api.ncbi.nlm.nih.gov/datasets/v1/genome/accession/{accession}/download"
         response = requests.get(url)
         if response.ok:
-            return response.text
+            # Define the path where you want to extract the zip file
+            extraction_path = os.path.join(os.path.dirname(__file__), '..', 'extracted_data')
+
+            # Create the extraction path if it doesn't exist
+            os.makedirs(extraction_path, exist_ok=True)
+
+            # Save the zip file
+            zip_file_path = os.path.join(extraction_path, f"{accession}.zip")
+            with open(zip_file_path, 'wb') as f:
+                f.write(response.content)
+
+            # Extract the zip file
+            time.sleep(1)
+            print("Zip file path:", zip_file_path)
+            with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+                zip_ref.extractall(extraction_path)
+
+            # Return the path to the extracted data
+            return os.path.join(extraction_path, accession)
         else:
             QMessageBox.warning(self, "Error", f"Failed to fetch sequence for accession {accession}.")
             return None
