@@ -10,7 +10,7 @@ class GenbankWindow(QDialog):
     switch_view = pyqtSignal(str)  # Signal to indicate view switch
 
     def __init__(self):
-        super(genbankWindow, self).__init__()
+        super(GenbankWindow, self).__init__()
         uic.loadUi("GUI/genbank_window.ui", self)
         self.show()
 

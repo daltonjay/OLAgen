@@ -20,7 +20,7 @@ def runMafftAlignment(fastasOLA): # here, I will separate the standard alignment
         for entry in fastafiles:
             sequences[entry.id] = entry.seq
             
-        alignmentSource.mafftAlign(fastasOLA)
+        mafftAlign(fastasOLA)
         
         fastasAlign = list(SeqIO.parse('outMafft.fasta', format = 'fasta'))
         
@@ -37,7 +37,7 @@ def runMafftAlignment(fastasOLA): # here, I will separate the standard alignment
                 f.write('>' + seq + '\n')
                 f.write(str(out).upper()+'\n')
                 
-        alignmentSource.mafftAlign('target_AAs.fasta')
+        mafftAlign('target_AAs.fasta')
 
         # Now let's check to make sure all of the sequences are aligned by looking at 
         # entry lengths.
@@ -72,7 +72,7 @@ def runClustAlignment(fastasOLA): # here, I will separate the standard alignment
         for entry in fastafiles:
             sequences[entry.id] = entry.seq
             
-        wait_var = alignmentSource.clustAlign(fastasOLA)
+        wait_var = clustAlign(fastasOLA)
     
         if wait_var == 1:
             fastasAlign = list(SeqIO.parse('outClustalo.fasta', format = 'fasta'))
@@ -90,7 +90,7 @@ def runClustAlignment(fastasOLA): # here, I will separate the standard alignment
                     f.write('>' + seq + '\n')
                     f.write(str(out).upper()+'\n')
                     
-            wait_var2 = alignmentSource.clustAlign('target_AAs.fasta')
+            wait_var2 = clustAlign('target_AAs.fasta')
             
             if wait_var2 == 1:
             
