@@ -1,10 +1,12 @@
 import os
 from PyQt5.QtWidgets import QDialog
 from PyQt5 import uic
+
 from .fasta_window import FastaWindow
 from .help_window import HelpWindow
 from .genbank_window import GenbankWindow
 
+# Main window UI and controller
 class MainWindow(QDialog):
     def __init__(self, global_state, parent=None):
         super(MainWindow, self).__init__(parent)

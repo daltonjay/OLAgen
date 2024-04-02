@@ -1,8 +1,10 @@
+import os
 from PyQt5.QtWidgets import QDialog, QDialogButtonBox
 from PyQt5 import uic
-import os
+
 from .output_window import OutputWindow
 
+# Genbank window UI and controller
 class GenbankWindow(QDialog):
 
     def __init__(self, global_state):

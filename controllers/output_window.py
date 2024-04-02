@@ -1,22 +1,22 @@
 import os
 import sys
+import csv
+import pandas as pd
+
+from Bio.Seq import Seq
 from PyQt5.QtWidgets import QDialog, QMessageBox, QFileDialog, QTableWidget, QTableWidgetItem
 from PyQt5 import uic
 from PyQt5.QtCore import pyqtSignal
-import csv
-from Bio.Seq import Seq
-import pandas as pd
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 project_dir = os.path.dirname(current_dir)
 if project_dir not in sys.path:
     sys.path.insert(0, project_dir)
-
 from utils.olagenProcess import *
 from utils.dimerScreening import *
 
+# Output window UI and controller
 class OutputWindow(QDialog):
-    switch_view = pyqtSignal(str)  # Signal to indicate view switch
 
     def __init__(self, global_state):
         super(OutputWindow, self).__init__()
@@ -70,8 +70,7 @@ class OutputWindow(QDialog):
         self.reagentTable.setColumnWidth(8, 200)
         self.reagentTable.setColumnWidth(9, 100)
         self.reagentTable.setColumnWidth(10, 300)
-
-    #KunalTest    
+   
     def display_alignment_result(self, alignment_result):
         # Use this method to display the alignment result in your outputWindow
         # For example, if you have a QTextEdit or similar widget to display the result
@@ -271,7 +270,6 @@ class OutputWindow(QDialog):
         typeItem = QTableWidgetItem(choice_Type)
         citeItem = QTableWidgetItem(choice_cite)
         
-        
         current_row_count = self.reagentTable.rowCount()
         self.reagentTable.setRowCount(current_row_count + 1)
         
@@ -287,7 +285,6 @@ class OutputWindow(QDialog):
         self.reagentTable.setItem(current_row_count, 9, typeItem)
         self.reagentTable.setItem(current_row_count, 10, citeItem)
         
-            
     def exportToCSV(self):
         filename, _ = QFileDialog.getSaveFileName(self, "Export Data", "", "CSV Files (*.csv)")
 
@@ -321,7 +318,6 @@ class OutputWindow(QDialog):
                 QMessageBox.information(self, "Success", "Data exported successfully!")
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Error exporting data: {str(e)}")
-
      
     def returnHome(self):
         self.global_state.mainWidget.setCurrentIndex(0)

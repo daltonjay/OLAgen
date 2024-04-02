@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel
 
+# Help dialog UI and controller
 class HelpWindow(QDialog):
     def __init__(self):
         super().__init__()
@@ -8,7 +9,7 @@ class HelpWindow(QDialog):
         
     def initUI(self):
         self.setWindowTitle('Help Window')
-        self.setFixedSize(300, 200)  # Set a fixed size for the window
+        self.setFixedSize(300, 200)
 
         layout = QVBoxLayout()
 

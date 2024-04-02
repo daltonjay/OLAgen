@@ -1,22 +1,22 @@
 import os
-from Bio import SeqIO
+import sys
+
 from PyQt5.QtCore import pyqtSignal, QStringListModel
 from PyQt5.QtWidgets import QDialog, QFileDialog
 from PyQt5 import uic
-import sys
-from .output_window import OutputWindow
+from Bio import SeqIO
 
+from .output_window import OutputWindow
 current_dir = os.path.dirname(os.path.abspath(__file__))
 project_dir = os.path.dirname(current_dir)
 if project_dir not in sys.path:
     sys.path.insert(0, project_dir)
-
 from utils.olagenProcess import *
 
+# FASTA input window UI and controller
 class FastaWindow(QDialog):
     return_global_dict = pyqtSignal(dict)
     return_global_list = pyqtSignal(list)
-    switch_view = pyqtSignal(str)  # Signal to indicate view switch
     
     def __init__(self, global_state):
         super(FastaWindow, self).__init__()
