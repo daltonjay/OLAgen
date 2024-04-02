@@ -1,6 +1,11 @@
+"""
+Copyright: Dalton J. Nelson, Vanderbilt University
+First Created: April 2023
+Last Modified: March 28, 2024
+"""
+
 # This module contains functions to perform (1) mafft and (2) clustalo alignments
 # For use aligning .fasta and GenBank Accession provided sequences as part of OLAgen
-# Dalton J. Nelson, copyright 2024
 
 import subprocess
 
