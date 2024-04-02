@@ -265,7 +265,7 @@ class OutputWindow(QDialog):
         targItem = QTableWidgetItem(choice_target)
         snpItem = QTableWidgetItem(choice_snp)
         vpItem = QTableWidgetItem(choice_FWD + 'cgc' + choice_HYD + desired_row['VP_Probe'].values[0])
-        vpWtItem = QTableWidgetItem(choice_FWD + 'cgc' + desired_row['WT_Probe'].values[0])
+        vpWtItem = QTableWidgetItem(choice_FWD + desired_row['WT_Probe'].values[0])
         cpItem = QTableWidgetItem('/5Phos/' + desired_row['CP_Probe'].values[0] + choice_revRC)
         fwdItem = QTableWidgetItem(choice_FWD)
         revItem = QTableWidgetItem(choice_REV)
