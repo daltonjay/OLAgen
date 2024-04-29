@@ -1,10 +1,10 @@
 
-# -*- coding: utf-8 -*-
 """
 Copyright: Dalton J. Nelson, Vanderbilt University
 First Created: April 2023
-Last Modified: January 29, 2024
+Last Modified: March 28, 2024
 """
+
 import sys
 import os
 import subprocess
@@ -43,26 +43,26 @@ class HelpWindow(QDialog):
         
         self.setLayout(layout)
         
-class genbankWindow(QDialog):
+#class genbankWindow(QDialog): # future development
     
-    def __init__(self):
-        super(genbankWindow, self).__init__()
-        uic.loadUi("/Users/daltonjaynelson/Documents/Research/OLAgen/GUI/genbank_window.ui", self)
-        self.show()
+    # def __init__(self):
+    #     super(genbankWindow, self).__init__()
+    #     uic.loadUi("/Users/daltonjaynelson/Documents/Research/OLAgen/GUI/genbank_window.ui", self)
+    #     self.show()
         
-        self.genbuttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-        self.genbuttonBox.accepted.connect(self.on_ok_clicked)
-        self.genbuttonBox.rejected.connect(self.on_cancel_clicked)
+    #     self.genbuttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+    #     self.genbuttonBox.accepted.connect(self.on_ok_clicked)
+    #     self.genbuttonBox.rejected.connect(self.on_cancel_clicked)
         
-    def on_ok_clicked(self):
-        output_window = outputWindow()
-        widget.addWidget(output_window)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+    # def on_ok_clicked(self):
+    #     output_window = outputWindow()
+    #     widget.addWidget(output_window)
+    #     widget.setCurrentIndex(widget.currentIndex()+1)
         
-    def on_cancel_clicked(self):
-        main_window = olaGUI()
-        widget.addWidget(main_window)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+    # def on_cancel_clicked(self):
+    #     main_window = olaGUI()
+    #     widget.addWidget(main_window)
+    #     widget.setCurrentIndex(widget.currentIndex()+1)
         
 class fastaWindow(QDialog):
     
@@ -429,7 +429,7 @@ class outputWindow(QDialog):
         targItem = QTableWidgetItem(choice_target)
         snpItem = QTableWidgetItem(choice_snp)
         vpItem = QTableWidgetItem(choice_FWD + 'cgc' + choice_HYD + desired_row['VP_Probe'].values[0])
-        vpWtItem = QTableWidgetItem(choice_FWD + 'cgc' + desired_row['WT_Probe'].values[0])
+        vpWtItem = QTableWidgetItem(choice_FWD + desired_row['WT_Probe'].values[0])
         cpItem = QTableWidgetItem('/5Phos/' + desired_row['CP_Probe'].values[0] + choice_revRC)
         fwdItem = QTableWidgetItem(choice_FWD)
         revItem = QTableWidgetItem(choice_REV)
@@ -498,7 +498,7 @@ class olaGUI(QDialog):
     
     def __init__(self):
         super(olaGUI, self).__init__()
-        uic.loadUi("GUI/main_window.ui", self)
+        uic.loadUi("GUI/main_windowV2.ui", self)
         self.show()
         self.setWindowTitle('OLAgen')
         
@@ -506,7 +506,7 @@ class olaGUI(QDialog):
         
         self.fastaInputButton.clicked.connect(self.fastaInit)
         self.helpButton.clicked.connect(self.helpPrompt)
-        self.genbankInputButton.clicked.connect(self.genbankPrompt)
+        #self.genbankInputButton.clicked.connect(self.genbankPrompt)
         
     def fastaInit(self):       
         fasta_window = fastaWindow()
