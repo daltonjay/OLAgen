@@ -67,6 +67,11 @@ class FastaWindow(QDialog):
         
         # Confirm the file loaded properly
         elements = [entry.id for entry in fastafiles]
+        elt_seqs = [entry.seq for entry in fastafiles]
+        for elt in elt_seqs:
+            if len(elt) < 52:
+                self.statusLabel.setText('ERROR: Seqs <52 bases!')
+                self.statusLabel.setStyleSheet("background-color: red;")
         self.global_state.target_names = elements  # Update the global state
         self.return_global_list.emit(elements)
         
@@ -131,8 +136,10 @@ class FastaWindow(QDialog):
         self.global_state.mainWidget.setCurrentIndex(0)
 
     def openOutput(self):
-        if not hasattr(self, 'output_window'):
-            self.output_window = OutputWindow(global_state=self.global_state)
-            self.global_state.mainWidget.addWidget(self.output_window)
-        self.global_state.mainWidget.setCurrentIndex(self.global_state.mainWidget.indexOf(self.output_window))
+        if self.user_fasta_file:
+            if self.mafftCheck.isChecked() or self.clustalCheck.isChecked():
+                if not hasattr(self, 'output_window'):
+                    self.output_window = OutputWindow(global_state=self.global_state)
+                    self.global_state.mainWidget.addWidget(self.output_window)
+                self.global_state.mainWidget.setCurrentIndex(self.global_state.mainWidget.indexOf(self.output_window))
         
