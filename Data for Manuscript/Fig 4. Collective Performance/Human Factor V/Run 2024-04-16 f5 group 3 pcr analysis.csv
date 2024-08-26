@@ -1,70 +1,36 @@
-"Excel Analysed Data Export"
-"Copyright (c) 2008 Corbett Life Science, a QIAGEN Company. All rights reserved."
-"File","Run 2024-04-16 f5 group 3 pcr.rex"
-"Date","4/16/2024"
-"Time","2:12:30 PM"
-
-"Quantitative analysis of Cycling A.g2 (Page 1)"
-
-"Analysis","No.","Name","Type","Ct","Given Conc (%)","Calc Conc (%)","% Var","Rep. Ct","Rep. Ct Std. Dev.","Rep. Ct (95% CI)","Rep. Calc. Conc.","Rep. Calc. Conc. (95% CI)"
-"Cycling A.g2 (Page 1)","1","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","2","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","3","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","4","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","5","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","6","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","7","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","8","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","9","Factor V MUT","Unknown","24.74","","","","24.59","0.22","[24.41 , 24.78]","",""
-"Cycling A.g2 (Page 1)","10","Factor V MUT","Unknown","24.88","","","","","","","",""
-"Cycling A.g2 (Page 1)","11","Factor V MUT","Unknown","24.52","","","","","","","",""
-"Cycling A.g2 (Page 1)","12","Factor V MUT","Unknown","24.42","","","","","","","",""
-"Cycling A.g2 (Page 1)","13","Factor V MUT","Unknown","24.56","","","","","","","",""
-"Cycling A.g2 (Page 1)","14","Factor V MUT","Unknown","24.37","","","","","","","",""
-"Cycling A.g2 (Page 1)","15","Factor V MUT","Unknown","24.90","","","","","","","",""
-"Cycling A.g2 (Page 1)","16","Factor V MUT","Unknown","24.37","","","","","","","",""
-"Cycling A.g2 (Page 1)","17","Factor V NTC","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","18","Factor V NTC","Unknown","39.22","","","","","","","",""
-"Cycling A.g2 (Page 1)","19","Factor V NTC","Unknown","40.59","","","","","","","",""
-"Cycling A.g2 (Page 1)","20","Factor V NTC","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","21","Factor V NTC","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","22","Factor V NTC","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","23","Factor V NTC","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","24","Factor V NTC","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","25","PCR NTC","Unknown","","","","","","","","",""
-"Cycling A.g2 (Page 1)","26","PCR NTC","Unknown","","","","","","","","",""
-
-
-
-"Quantitative analysis of Cycling A.Green (Page 1)"
-
-"Analysis","No.","Name","Type","Ct","Given Conc (%)","Calc Conc (%)","% Var","Rep. Ct","Rep. Ct Std. Dev.","Rep. Ct (95% CI)","Rep. Calc. Conc.","Rep. Calc. Conc. (95% CI)"
-"Cycling A.Green (Page 1)","1","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","2","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","3","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","4","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","5","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","6","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","7","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","8","Factor V WT","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","9","Factor V MUT","Unknown","25.58","","","","25.41","0.24","[25.22 , 25.61]","",""
-"Cycling A.Green (Page 1)","10","Factor V MUT","Unknown","25.74","","","","","","","",""
-"Cycling A.Green (Page 1)","11","Factor V MUT","Unknown","25.33","","","","","","","",""
-"Cycling A.Green (Page 1)","12","Factor V MUT","Unknown","25.20","","","","","","","",""
-"Cycling A.Green (Page 1)","13","Factor V MUT","Unknown","25.31","","","","","","","",""
-"Cycling A.Green (Page 1)","14","Factor V MUT","Unknown","25.23","","","","","","","",""
-"Cycling A.Green (Page 1)","15","Factor V MUT","Unknown","25.74","","","","","","","",""
-"Cycling A.Green (Page 1)","16","Factor V MUT","Unknown","25.18","","","","","","","",""
-"Cycling A.Green (Page 1)","17","Factor V NTC","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","18","Factor V NTC","Unknown","40.23","","","","","","","",""
-"Cycling A.Green (Page 1)","19","Factor V NTC","Unknown","41.83","","","","","","","",""
-"Cycling A.Green (Page 1)","20","Factor V NTC","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","21","Factor V NTC","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","22","Factor V NTC","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","23","Factor V NTC","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","24","Factor V NTC","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","25","PCR NTC","Unknown","","","","","","","","",""
-"Cycling A.Green (Page 1)","26","PCR NTC","Unknown","","","","","","","","",""
-
-
-
+Excel Analysed Data Export,,,,,,,,,,,,
+"Copyright (c) 2008 Corbett Life Science, a QIAGEN Company. All rights reserved.",,,,,,,,,,,,
+File,Run 2024-04-16 f5 group 3 pcr.rex,,,,,,,,,,,
+Date,4/16/24,,,,,,,,,,,
+Time,2:12:30 PM,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+Quantitative analysis of Cycling A.Green (Page 1),,,,,,,,,,,,
+,,,,,,,,,,,,
+Analysis,No.,Name,Type,Ct,Given Conc (%),Calc Conc (%),% Var,Rep. Ct,Rep. Ct Std. Dev.,Rep. Ct (95% CI),Rep. Calc. Conc.,Rep. Calc. Conc. (95% CI)
+Cycling A.Green (Page 1),1,Factor V WT,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),2,Factor V WT,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),3,Factor V WT,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),4,Factor V WT,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),5,Factor V WT,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),6,Factor V WT,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),7,Factor V WT,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),8,Factor V WT,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),9,Factor V MUT,Unknown,25.58,,,,25.41,0.24,"[25.22 , 25.61]",,
+Cycling A.Green (Page 1),10,Factor V MUT,Unknown,25.74,,,,,,,,
+Cycling A.Green (Page 1),11,Factor V MUT,Unknown,25.33,,,,,,,,
+Cycling A.Green (Page 1),12,Factor V MUT,Unknown,25.2,,,,,,,,
+Cycling A.Green (Page 1),13,Factor V MUT,Unknown,25.31,,,,,,,,
+Cycling A.Green (Page 1),14,Factor V MUT,Unknown,25.23,,,,,,,,
+Cycling A.Green (Page 1),15,Factor V MUT,Unknown,25.74,,,,,,,,
+Cycling A.Green (Page 1),16,Factor V MUT,Unknown,25.18,,,,,,,,
+Cycling A.Green (Page 1),17,Factor V NTC,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),18,Factor V NTC,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),19,Factor V NTC,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),20,Factor V NTC,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),21,Factor V NTC,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),22,Factor V NTC,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),23,Factor V NTC,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),24,Factor V NTC,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),25,PCR NTC,Unknown,,,,,,,,,
+Cycling A.Green (Page 1),26,PCR NTC,Unknown,,,,,,,,,

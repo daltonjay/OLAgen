@@ -1,0 +1,5 @@
+Figure 4. is a representative figure for the nature of specificity observed across studies during the investigations in the work presented.
+All data stored in the repository presents both the yellow and green channels which correspond to wild-type probe fluorescence (HEX) and 
+mutant probe fluorescence (FAM), respectively. Observation of any of these data will demonstrate the observed specificity. For example,
+the limit of detection studies for p(OLA-PCR) could act as a surrogate for the data presented in figure 4: mutant DNA target (ML278) was 
+spiked into the samples investigated and non-specific amplification was monitored in the yellow channel. 
